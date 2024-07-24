@@ -1,0 +1,10 @@
+# ninja log v6
+720	841	1721816960063845086	DataStructuresVisualizer	3a0cd1e0c17d8b8a
+2	995	1721816457423867200	CMakeFiles/DataStructuresVisualizer.dir/main.cpp.o	28f58223311fed7b
+1	35	1721820655075966867	build.ninja	27e68559314d7a5b
+2	720	1721816959343845117	CMakeFiles/DataStructuresVisualizer.dir/MainWindow.cpp.o	e8f482b8f0ced37c
+3	142	1721821586283925897	CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Vector.cpp.o	aa58dadbbc614898
+2	851	1721821586283925897	CMakeFiles/DataStructuresVisualizer.dir/main.cpp.o	28f58223311fed7b
+142	1176	1721821586423925891	CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Node.cpp.o	53182fca82ba04bf
+3	1264	1721821586283925897	CMakeFiles/DataStructuresVisualizer.dir/MainWindow.cpp.o	e8f482b8f0ced37c
+1264	1391	1721821587543925842	DataStructuresVisualizer	ce9abe9d4132df4a
