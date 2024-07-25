@@ -6,11 +6,11 @@
 
 class Vector {
 public:
-    Vector(sf::RenderWindow* _window);
+    Vector(sf::RenderWindow* _window,sf::Font *_font);
     void Parse();
     void Draw();
-    void ZomIn(sf::Vector2i mousePos);
-    void ZomOut(sf::Vector2i mousePos);
+    void ZoomIn(sf::Vector2i mousePos);
+    void ZoomOut(sf::Vector2i mousePos);
     void MoveLeft();
     void MoveRight();
     void MoveUp();
@@ -18,6 +18,7 @@ public:
 private:
     std::vector<int> dataStructure{};
     sf::RenderWindow* window;
+    sf::Font *font;
 
     std::vector<std::unique_ptr<NodeRect>> nodes;
 };

@@ -15,6 +15,7 @@ add_executable(DataStructuresVisualizer main.cpp
         UIClasses/MainWindow.cpp
         DataStructures/Vector.cpp
         UIClasses/NodeRect.cpp
+        UIClasses/Button.cpp
 )
 
 # Include SFML directories
