@@ -150,8 +150,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/tawfiq/CLionProjects/DataStructursVirtulizer/cmake-build-debug",
-		"source" : "/home/tawfiq/CLionProjects/DataStructursVirtulizer"
+		"build" : "/home/tawfiq/CLionProjects/DataStructuresVisualizer/cmake-build-debug",
+		"source" : "/home/tawfiq/CLionProjects/DataStructuresVisualizer"
 	},
 	"version" : 
 	{

@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "DataStructuresVisualizer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-DataStructuresVisualizer-Debug-af96bab393876a46ac48.json",
+					"jsonFile" : "target-DataStructuresVisualizer-Debug-ea2f53650962905ab87f.json",
 					"name" : "DataStructuresVisualizer",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/tawfiq/CLionProjects/DataStructursVirtulizer/cmake-build-debug",
-		"source" : "/home/tawfiq/CLionProjects/DataStructursVirtulizer"
+		"build" : "/home/tawfiq/CLionProjects/DataStructuresVisualizer/cmake-build-debug",
+		"source" : "/home/tawfiq/CLionProjects/DataStructuresVisualizer"
 	},
 	"version" : 
 	{
