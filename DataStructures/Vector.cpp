@@ -1,16 +1,16 @@
+#include <iostream>
 #include "Vector.h"
 
 
 #define MAX_NODE_WIDTH 600
 
-Vector::Vector(sf::RenderWindow *_window, sf::Font *_font) {
-    window = _window;
-    font = _font;
-    for (int i = 0; i < 100; i++)
-        dataStructure.push_back(i);
+Vector::Vector(sf::RenderWindow *_window, sf::Font *_font) : Visualizer(_window, _font) {
+    availableMethods.emplace_back("Push_back");
+    availableMethods.emplace_back("Remove");
 }
 
 void Vector::Parse() {
+    nodes.clear();
     int currentXPos = window->getSize().x / 4 + 50;
     for (auto element: dataStructure) {
         std::unique_ptr<NodeRect> node = std::make_unique<NodeRect>(
@@ -31,6 +31,8 @@ void Vector::Draw() {
 }
 
 void Vector::ZoomIn(sf::Vector2i mousePos) {
+    if (dataStructure.empty())
+        return;
     if (nodes[0]->GetSize().x < MAX_NODE_WIDTH) {
         int amount = ((mousePos.x - nodes[0]->GetPosition().x) / nodes[0]->GetSize().x) * nodes[0]->GetSize().x / 4;
         nodes[0]->MoveLeft(amount);
@@ -44,6 +46,8 @@ void Vector::ZoomIn(sf::Vector2i mousePos) {
 }
 
 void Vector::ZoomOut(sf::Vector2i mousePos) {
+    if (dataStructure.empty())
+        return;
     int amount = ((mousePos.x - nodes[0]->GetPosition().x) / nodes[0]->GetSize().x) * nodes[0]->GetSize().x / 4;
     nodes[0]->MoveRight(amount);
     auto currentPosition = nodes[0]->GetPosition() + sf::Vector2f(0, nodes[0]->GetSize().y / 8);
@@ -54,26 +58,23 @@ void Vector::ZoomOut(sf::Vector2i mousePos) {
     }
 }
 
-void Vector::MoveLeft() {
-    for (auto &node: nodes) {
-        node->MoveLeft();
+void Vector::MethodButtonPressed(int idx, TextHolder *textHolder) {
+    switch (idx) {
+        case 0:
+            dataStructure.push_back(std::stoi(textHolder->GetText().toAnsiString()));
+            Parse();
+            break;
+        case 1:
+            auto pos = std::find(dataStructure.begin(), dataStructure.end(), std::stoi(textHolder->GetText().toAnsiString()));
+            if (pos == dataStructure.end())
+                break;
+            dataStructure.erase(pos);
+            Parse();
+            break;
     }
+//    size = dataStructure.size();
 }
 
-void Vector::MoveRight() {
-    for (auto &node: nodes) {
-        node->MoveRight();
-    }
-}
-
-void Vector::MoveUp() {
-    for (auto &node: nodes) {
-        node->MoveUp();
-    }
-}
-
-void Vector::MoveDown() {
-    for (auto &node: nodes) {
-        node->MoveDown();
-    }
+size_t Vector::GetSize() {
+    return dataStructure.size();
 }

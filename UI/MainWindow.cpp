@@ -5,6 +5,7 @@
 
 #define IN_USE_BUTTON_COLOR {64, 64, 64, 250}
 #define NON_IN_USE_BUTTON_COLOR { 176, 176, 176, 250}
+
 MainWindow::ZoomButton::ZoomButton(sf::RenderWindow *_window, sf::Vector2f position, sf::Vector2f size, sf::String text,
                                    sf::Font *font) : Button(_window, position, size, text, font, nullptr) {
 
@@ -58,7 +59,13 @@ void MainWindow::InitiateFields() {
     controlsArea->setPosition(0, 0);
     controlsArea->setFillColor({169, 169, 169, 255});
 
+    vec = new Vector(window.get(), font.get());
+    vec->Parse();
+
+
     InitiateButtons();
+
+
 }
 
 void MainWindow::InitiateButtons() {
@@ -72,40 +79,54 @@ void MainWindow::InitiateButtons() {
                        {100, 50}, "Zoom out",
                        font.get()));
 
-    vec = new Vector(window.get(), font.get());
-    vec->Parse();
     buttons.push_back(
             std::make_unique<Button>(
-                    Button(window.get(), sf::Vector2f(window->getSize().x - 3 * 50 - 10, window->getSize().y - 120),
+                    Button(window.get(), sf::Vector2f(window->getSize().x - 50 - 10, window->getSize().y - 120),
+                           {50, 50}, "right", font.get(), [this]() {
+                                vec->MoveRight();
+                            })));
+
+    buttons.push_back(
+            std::make_unique<Button>(
+                    Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "left", font.get(), [this]() {
                                 vec->MoveLeft();
                             })));
     buttons.push_back(
             std::make_unique<Button>(
-                    Button(window.get(), sf::Vector2f(window->getSize().x - 2 * 50 - 10, window->getSize().y - 120),
+                    Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "down", font.get(), [this]() {
                                 vec->MoveDown();
                             })));
     buttons.push_back(
             std::make_unique<Button>(
-                    Button(window.get(), sf::Vector2f(window->getSize().x - 1 * 50 - 10, window->getSize().y - 120),
-                           {50, 50}, "right", font.get(), [this]() {
-                                vec->MoveRight();
-                            })));
-    buttons.push_back(
-            std::make_unique<Button>(
-                    Button(window.get(), sf::Vector2f(window->getSize().x - 2 * 50 - 11, window->getSize().y - (120 + 50)),
+                    Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "up", font.get(), [this]() {
                                 vec->MoveUp();
                             })));
+
+    for (int i = 0; i < vec->availableMethods.size(); i++) {
+        textHolders.push_back(
+                std::make_unique<TextHolder>(
+                        TextHolder(window.get(), sf::Vector2f(10 + 10 + 100, 100 + i * (50 + 8)),
+                                   {100, 50}, "0", font.get()
+                        )));
+        buttons.push_back(
+                std::make_unique<Button>(
+                        Button(window.get(), sf::Vector2f(10, 100 + i * (50 + 8)),
+                               {100, 50}, vec->availableMethods[i], font.get(), [this, i]() {
+                                    vec->MethodButtonPressed(i, textHolders[i].get());
+                                })));
+
+    }
+
 }
 
 void MainWindow::Run() {
     while (window->isOpen()) {
-        HandelEvents();
         window->clear();
-        DrawVisualizationArea();
-        DrawCommandsArea();
+        HandelEvents();
+        DrawComponents();
         window->display();
     }
 }
@@ -119,7 +140,8 @@ void MainWindow::HandelEvents() {
         if (event.type == sf::Event::MouseButtonPressed) {
             HandelMouseEvent(sf::Mouse::getPosition(*window));
         }
-        if (event.type == sf::Event::KeyPressed)
+        if (event.type == sf::Event::KeyPressed) {
+            HandelTexHolderEvents(event);
             switch (event.key.code) {
                 case sf::Keyboard::Left:
                     vec->MoveLeft();
@@ -133,18 +155,27 @@ void MainWindow::HandelEvents() {
                 case sf::Keyboard::Down:
                     vec->MoveDown();
                     break;
-                case sf::Keyboard::O:
-                    vec->ZoomIn(sf::Mouse::getPosition(*window));
-                    break;
-                case sf::Keyboard::I:
-                    vec->ZoomOut(sf::Mouse::getPosition(*window));
-                    break;
             }
+        }
     }
 }
+
 void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
     for (auto &button: buttons) {
         if (button->HandelClickEvent(mouse_position)) {
+            return;
+        }
+    }
+    for (auto &textHolder: textHolders) {
+        if (textHolder->HandelClickEvent(mouse_position)) {
+            inUseTextHolder = textHolder.get();
+            for (auto &otherTextHolder: textHolders) {
+                if (textHolder->GetPosition() != otherTextHolder->GetPosition()) {
+                    otherTextHolder->ChangeState(false);
+                    if (otherTextHolder->GetText().isEmpty())
+                        otherTextHolder->SetText("0");
+                }
+            }
             return;
         }
     }
@@ -168,17 +199,83 @@ void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
     }
 }
 
-void MainWindow::DrawVisualizationArea() const {
+void MainWindow::HandelTexHolderEvents(sf::Event &event) {
+    if (inUseTextHolder) {
+        std::string text = inUseTextHolder->GetText().toAnsiString();
+        bool hyphen = false;
+
+        if (text[0] == '-') {
+            hyphen = true;
+            text = text.substr(1);
+        }
+        if (text.empty()) {
+            text = "0";
+        }
+        if (event.key.code == sf::Keyboard::BackSpace) {
+            if (text.size() == 1) {
+                text = ("0");
+                hyphen = false;
+            } else
+                text = (text.substr(0, text.size() - 1));
+        }
+        if (std::stoi(text) < 200'000'000) {
+            switch (event.key.code) {
+                case sf::Keyboard::Hyphen:
+                    if (text == "0") {
+                        text = ("-");
+                        hyphen = false;
+                    }
+                    break;
+                case sf::Keyboard::Num0:
+                    text = (std::to_string(std::stoi(text) * 10 + 0));
+                    break;
+                case sf::Keyboard::Num1:
+                    text = (std::to_string(std::stoi(text) * 10 + 1));
+                    break;
+                case sf::Keyboard::Num2:
+                    text = (std::to_string(std::stoi(text) * 10 + 2));
+                    break;
+                case sf::Keyboard::Num3:
+                    text = (std::to_string(std::stoi(text) * 10 + 3));
+                    break;
+                case sf::Keyboard::Num4:
+                    text = (std::to_string(std::stoi(text) * 10 + 4));
+                    break;
+                case sf::Keyboard::Num5:
+                    text = (std::to_string(std::stoi(text) * 10 + 5));
+                    break;
+                case sf::Keyboard::Num6:
+                    text = (std::to_string(std::stoi(text) * 10 + 6));
+                    break;
+                case sf::Keyboard::Num7:
+                    text = (std::to_string(std::stoi(text) * 10 + 7));
+                    break;
+                case sf::Keyboard::Num8:
+                    text = (std::to_string(std::stoi(text) * 10 + 8));
+                    break;
+                case sf::Keyboard::Num9:
+                    text = (std::to_string(std::stoi(text) * 10 + 9));
+                    break;
+            }
+            if (hyphen)
+                inUseTextHolder->SetText("-" + text);
+            else
+                inUseTextHolder->SetText(text);
+        }
+    }
+}
+
+void MainWindow::DrawComponents() const {
     window->draw(*visualisationArea);
     vec->Draw();
+    window->draw(*controlsArea);
     zoomInButton->Draw();
     zoomOutButton->Draw();
     for (auto &button: buttons) {
         button->Draw();
     }
+    for (auto &textHolder: textHolders) {
+        textHolder->Draw();
+    }
 
-}
-
-void MainWindow::DrawCommandsArea() const {
-    window->draw(*controlsArea);
 }

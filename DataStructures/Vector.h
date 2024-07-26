@@ -2,23 +2,19 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-#include "../UIClasses/NodeRect.h"
+#include "../UI/NodeRect.h"
+#include "../UI/Visualizer.h"
 
-class Vector {
+class Vector : public Visualizer {
 public:
     Vector(sf::RenderWindow* _window,sf::Font *_font);
-    void Parse();
-    void Draw();
-    void ZoomIn(sf::Vector2i mousePos);
-    void ZoomOut(sf::Vector2i mousePos);
-    void MoveLeft();
-    void MoveRight();
-    void MoveUp();
-    void MoveDown();
-private:
-    std::vector<int> dataStructure{};
-    sf::RenderWindow* window;
-    sf::Font *font;
+    void Parse() override;
+    void Draw() override;
+    void ZoomIn(sf::Vector2i mousePos) override;
+    void ZoomOut(sf::Vector2i mousePos) override;
+    void MethodButtonPressed(int idx, TextHolder *textHolder) override;
 
-    std::vector<std::unique_ptr<NodeRect>> nodes;
+    size_t GetSize();
+private:
+    std::vector<int> dataStructure;
 };

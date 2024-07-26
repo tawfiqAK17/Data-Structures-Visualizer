@@ -12,10 +12,16 @@ find_package(SFML COMPONENTS graphics window system REQUIRED)
 
 # Add the executable
 add_executable(DataStructuresVisualizer main.cpp
-        UIClasses/MainWindow.cpp
+        UI/MainWindow.cpp
         DataStructures/Vector.cpp
-        UIClasses/NodeRect.cpp
-        UIClasses/Button.cpp
+        UI/NodeRect.cpp
+        UI/Button.cpp
+        DataStructures/DataStructure.cpp
+        DataStructures/DataStructure.h
+        UI/Visualizer.cpp
+        UI/Visualizer.h
+        UI/TextHolder.cpp
+        UI/TextHolder.h
 )
 
 # Include SFML directories

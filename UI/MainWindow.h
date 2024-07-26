@@ -3,6 +3,7 @@
 
 #include "../DataStructures/Vector.h"
 #include "Button.h"
+#include "TextHolder.h"
 
 class MainWindow {
 private:
@@ -24,15 +25,14 @@ private:
     void InitiateButtons();
     void HandelEvents();
     void HandelMouseEvent(sf::Vector2i mouse_position);
-    void DrawVisualizationArea() const;
-    void DrawCommandsArea() const;
+    void HandelTexHolderEvents(sf::Event &event);
+    void DrawComponents() const;
 
 private:
     std::unique_ptr<sf::Font> font;
-
-    Vector *vec;
-
     std::unique_ptr<sf::RenderWindow> window;
+
+    Visualizer *vec;
 
     std::unique_ptr<sf::RectangleShape> visualisationArea;
     std::unique_ptr<sf::RectangleShape> controlsArea;
@@ -40,4 +40,8 @@ private:
     std::unique_ptr<ZoomButton> zoomInButton;
     std::unique_ptr<ZoomButton> zoomOutButton;
     std::vector<std::unique_ptr<Button>> buttons;
+    std::vector<std::unique_ptr<TextHolder>> textHolders;
+
+    TextHolder *inUseTextHolder = nullptr;
+
 };
