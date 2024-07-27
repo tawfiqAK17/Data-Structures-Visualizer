@@ -47,6 +47,17 @@ void TextHolder::Draw() const {
     window->draw(*text);
 }
 
+int TextHolder::GetStringAsInt() const {
+    int number = 0;
+    if (text->getString()[0] == '-') {
+        if (text->getString().getSize() == 1) //there is just a -
+            return -1;
+        return -1 * std::stoi(text->getString().toAnsiString().substr(1));
+
+    }
+    return std::stoi(text->getString().toAnsiString());
+}
+
 bool TextHolder::GetState() const {
     return inUse;
 }

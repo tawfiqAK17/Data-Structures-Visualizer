@@ -9,8 +9,10 @@ ArrayVisualizer::ArrayVisualizer(sf::RenderWindow *_window, sf::Font *_font) : V
     dataStructure = new Array;
 
     methodsWithArgs.emplace_back("Add");
-    methodsWithArgs.emplace_back("Remove");
     methodsWithArgs.emplace_back("Add Random");
+    methodsWithArgs.emplace_back("Remove");
+    methodsWithArgs.emplace_back("Remove at");
+    methodsWithArgs.emplace_back("Find");
 
     methodsWithOutArgs.emplace_back("Clear");
 
@@ -83,34 +85,43 @@ void ArrayVisualizer::ZoomOut(sf::Vector2i mousePos) {
 unsigned long ArrayVisualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
     unsigned long executionTime = 0;
     if (textHolder) { // call to a method with args
-        int number = std::stoi(textHolder->GetText().toAnsiString());
+        int parameter = textHolder->GetStringAsInt();
         switch (idx) {
             case 0:
-                executionTime = Benchmark([this, number](){dynamic_cast<Array *>(dataStructure)->Add(number); });
+                executionTime = Benchmark(
+                        [this, parameter]() { dynamic_cast<Array *>(dataStructure)->Add(parameter); });
                 break;
             case 1:
-                executionTime = Benchmark([this, number](){ dynamic_cast<Array *>(dataStructure)->Remove(number); });
-
-                break;
-            case 2:
-                for (int i = 0; i < number; i++) {
-                    executionTime += Benchmark([this, number](){dynamic_cast<Array *>(dataStructure)->Add(rand()); });
+                for (int i = 0; i < parameter; i++)
+                    executionTime += Benchmark(
+                            [this]() { dynamic_cast<Array *>(dataStructure)->Add(rand() % 1000); });
+                    break;
+                    case 2:
+                        executionTime = Benchmark(
+                                [this, parameter]() { dynamic_cast<Array *>(dataStructure)->Remove(parameter); });
+                    break;
+                    case 3:
+                        executionTime += Benchmark(
+                                [this, parameter]() { dynamic_cast<Array *>(dataStructure)->RemoveAt(parameter); });
+                    break;
+                    case 4:
+                        executionTime += Benchmark(
+                                [this, parameter]() { dynamic_cast<Array *>(dataStructure)->Find(parameter); });
+                    break;
                 }
-                break;
+        } else { // call to a method without args
+            switch (idx) {
+                case 0:
+                    executionTime = Benchmark([this]() { dynamic_cast<Array *>(dataStructure)->Clear(); });
+                    break;
+            }
         }
-    } else { // call to a method without args
-        switch (idx) {
-            case 0:
-                executionTime = Benchmark([this](){dynamic_cast<Array *>(dataStructure)->Clear(); });
-                break;
+        if (nodes.empty())
+            Parse();
+        else {
+            ReParse(nodes[0]->GetPosition(), nodes[0]->GetSize());
         }
+        return executionTime;
     }
-    if (nodes.empty())
-        Parse();
-    else {
-        ReParse(nodes[0]->GetPosition(), nodes[0]->GetSize());
-    }
-    return executionTime;
-}
 
 

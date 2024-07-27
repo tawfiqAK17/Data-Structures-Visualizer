@@ -9,6 +9,8 @@ public:
     ~Array() override;
     void Add(int val);
     void Remove(int val);
+    void RemoveAt(int idx);
+    void Find(int val);
     void Clear();
 
     size_t GetSizeInBytes() override;

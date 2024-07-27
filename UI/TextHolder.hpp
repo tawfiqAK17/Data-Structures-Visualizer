@@ -10,6 +10,7 @@ public:
     void ChangeState(bool _inUse);
     void SetText(std::string new_text);
 
+    [[nodiscard]] int GetStringAsInt() const;
     [[nodiscard]] bool GetState() const;
     [[nodiscard]] sf::Vector2f GetPosition() const;
     [[nodiscard]] sf::Vector2f GetSize() const;

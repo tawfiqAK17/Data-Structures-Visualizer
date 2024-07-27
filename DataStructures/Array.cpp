@@ -10,13 +10,6 @@ void Array::Add(int val) {
 }
 
 void Array::Remove(int val) {
-    if (size == 1 && data[0] == val) {
-        if (Shrink())
-            size--;
-        else
-            size = 0;
-        return;
-    }
     for (int i = 0; i < size; i++) {
         if (data[i] == val) {
             for (int j = i; j < size - 1; j++) {
@@ -29,6 +22,29 @@ void Array::Remove(int val) {
             return;
         }
     }
+}
+
+void Array::RemoveAt(int idx) {
+    if (idx >= size || idx < 0)
+        return;
+    for (int i = 0; i < size; i++) {
+        if (i == idx) {
+            for (int j = i; j < size - 1; j++) {
+                data[j] = data[j + 1];
+            }
+            if (Shrink())
+                size--;
+            else
+                size = 0;
+            return;
+        }
+    }
+}
+
+void Array::Find(int val) {
+    for (int i = 0; i < size; i++)
+        if (data[i] == val)
+            return;
 }
 
 void Array::Clear() {

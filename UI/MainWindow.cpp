@@ -185,7 +185,6 @@ void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
             for (auto &otherTextHolder: textHolders) {
                 if (textHolder->GetPosition() != otherTextHolder->GetPosition()) {
                     otherTextHolder->ChangeState(false);
-                    otherTextHolder->SetText("0");
                 }
             }
             return;
