@@ -61,8 +61,8 @@ void MainWindow::InitiateFields() {
     controlsArea->setPosition(0, 0);
     controlsArea->setFillColor({169, 169, 169, 255});
 
-    vec = new ArrayVisualizer(window.get(), font.get());
-    vec->Parse();
+    array = new ArrayVisualizer(window.get(), font.get());
+    array->Parse();
 
 
     InitiateButtons();
@@ -85,29 +85,29 @@ void MainWindow::InitiateButtons() {
             std::make_unique<Button>(
                     Button(window.get(), sf::Vector2f(window->getSize().x - 50 - 10, window->getSize().y - 120),
                            {50, 50}, "right", font.get(), [this]() {
-                                vec->MoveRight();
+                                array->MoveRight();
                             })));
 
     buttons.push_back(
             std::make_unique<Button>(
                     Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "left", font.get(), [this]() {
-                                vec->MoveLeft();
+                                array->MoveLeft();
                             })));
     buttons.push_back(
             std::make_unique<Button>(
                     Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "down", font.get(), [this]() {
-                                vec->MoveDown();
+                                array->MoveDown();
                             })));
     buttons.push_back(
             std::make_unique<Button>(
                     Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "up", font.get(), [this]() {
-                                vec->MoveUp();
+                                array->MoveUp();
                             })));
 
-    for (int i = 0; i < vec->methodsWithArgs.size(); i++) {
+    for (int i = 0; i < array->methodsWithArgs.size(); i++) {
         textHolders.push_back(
                 std::make_unique<TextHolder>(
                         TextHolder(window.get(), sf::Vector2f(10 + 10 + controlsArea->getSize().x / 2 - 20, 100 + i * (50 + 8)),
@@ -116,22 +116,22 @@ void MainWindow::InitiateButtons() {
         buttons.push_back(
                 std::make_unique<Button>(
                         Button(window.get(), sf::Vector2f(10, 100 + i * (50 + 8)),
-                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), vec->methodsWithArgs[i], font.get(), [this, i]() {
-                                    vec->MethodButtonPressed(i, textHolders[i].get());
+                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), array->methodsWithArgs[i], font.get(), [this, i]() {
+                                    array->MethodButtonPressed(i, textHolders[i].get());
                                 })));
 
     }
-    for (int i = 0; i < vec->methodsWithOutArgs.size(); i++) {
+    for (int i = 0; i < array->methodsWithOutArgs.size(); i++) {
         buttons.push_back(
                 std::make_unique<Button>(
-                        Button(window.get(), sf::Vector2f(10, 100 + (i + vec->methodsWithArgs.size()) * (50 + 8)),
-                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), vec->methodsWithOutArgs[i], font.get(), [this, i]() {
-                                    vec->MethodButtonPressed(i, nullptr);
+                        Button(window.get(), sf::Vector2f(10, 100 + (i + array->methodsWithArgs.size()) * (50 + 8)),
+                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), array->methodsWithOutArgs[i], font.get(), [this, i]() {
+                                    array->MethodButtonPressed(i, nullptr);
                                 })));
 
     }
 
-
+    sizeInBytes = std::make_unique<StaticText>(StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 150), sf::Vector2f(controlsArea->getSize().x - 20, 50), "Used memory: 0 Bytes", font.get()));
 }
 
 void MainWindow::Run() {
@@ -156,16 +156,16 @@ void MainWindow::HandelEvents() {
             HandelTexHolderEvents(event);
             switch (event.key.code) {
                 case sf::Keyboard::Left:
-                    vec->MoveLeft();
+                    array->MoveLeft();
                     break;
                 case sf::Keyboard::Right:
-                    vec->MoveRight();
+                    array->MoveRight();
                     break;
                 case sf::Keyboard::Up:
-                    vec->MoveUp();
+                    array->MoveUp();
                     break;
                 case sf::Keyboard::Down:
-                    vec->MoveDown();
+                    array->MoveDown();
                     break;
             }
         }
@@ -175,6 +175,7 @@ void MainWindow::HandelEvents() {
 void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
     for (auto &button: buttons) {
         if (button->HandelClickEvent(mouse_position)) {
+            sizeInBytes->SetText("Used memory: " + std::to_string(array->GetSizeInBytes()) + " Bytes");
             return;
         }
     }
@@ -205,9 +206,9 @@ void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
 
     if (mouse_position.x > visualisationArea->getPosition().x) {
         if (zoomInButton->InUse())
-            vec->ZoomIn(mouse_position);
+            array->ZoomIn(mouse_position);
         if (zoomOutButton->InUse())
-            vec->ZoomOut(mouse_position);
+            array->ZoomOut(mouse_position);
     }
 }
 
@@ -279,10 +280,11 @@ void MainWindow::HandelTexHolderEvents(sf::Event &event) {
 
 void MainWindow::DrawComponents() const {
     window->draw(*visualisationArea);
-    vec->Draw();
+    array->Draw();
     window->draw(*controlsArea);
     zoomInButton->Draw();
     zoomOutButton->Draw();
+    sizeInBytes->Draw();
     for (auto &button: buttons) {
         button->Draw();
     }

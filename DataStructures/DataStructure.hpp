@@ -1,11 +1,14 @@
 #pragma once
 
+#include <cstddef>
+
 class DataStructure {
 public:
     DataStructure() = default;
     virtual ~DataStructure();
-    [[nodiscard]] unsigned int GetSize() const;
+    virtual size_t GetSizeInBytes() = 0;
+    [[nodiscard]] size_t GetSize() const;
 
 protected:
-    unsigned int size = 0;
+    size_t size = 0;
 };

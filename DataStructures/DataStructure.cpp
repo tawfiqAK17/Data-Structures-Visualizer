@@ -1,9 +1,8 @@
 #include "DataStructure.hpp"
 
-unsigned int DataStructure::GetSize() const {
+DataStructure::~DataStructure() {}
+
+size_t DataStructure::GetSize() const {
     return size;
 }
 
-DataStructure::~DataStructure() {
-
-}

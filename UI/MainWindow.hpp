@@ -4,6 +4,7 @@
 #include "ArrayVisualizer.hpp"
 #include "Button.hpp"
 #include "TextHolder.hpp"
+#include "StaticText.hpp"
 
 class MainWindow {
 private:
@@ -32,7 +33,7 @@ private:
     std::unique_ptr<sf::Font> font;
     std::unique_ptr<sf::RenderWindow> window;
 
-    Visualizer *vec;
+    Visualizer *array;
 
     std::unique_ptr<sf::RectangleShape> visualisationArea;
     std::unique_ptr<sf::RectangleShape> controlsArea;
@@ -41,6 +42,8 @@ private:
     std::unique_ptr<ZoomButton> zoomOutButton;
     std::vector<std::unique_ptr<Button>> buttons;
     std::vector<std::unique_ptr<TextHolder>> textHolders;
+
+    std::unique_ptr<StaticText> sizeInBytes;
 
     TextHolder *inUseTextHolder = nullptr;
 

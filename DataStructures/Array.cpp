@@ -1,7 +1,3 @@
-//
-// Created by tawfiq on 27/07/24.
-//
-
 #include "Array.hpp"
 
 Array::~Array() {
@@ -69,6 +65,10 @@ bool Array::Shrink() {
     }
     delete[] temp;
     return true;
+}
+
+size_t Array::GetSizeInBytes() {
+    return size * sizeof(int);
 }
 
 int Array::operator[](int idx) const {

@@ -64,3 +64,7 @@ void Visualizer::MoveDown() {
         node->MoveDown();
     }
 }
+
+size_t Visualizer::GetSizeInBytes() {
+    return dataStructure->GetSizeInBytes();
+}

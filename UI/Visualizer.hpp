@@ -20,6 +20,7 @@ public:
     void MoveUp();
     void MoveDown();
 
+    size_t GetSizeInBytes();
     std::vector<std::string> methodsWithArgs;
     std::vector<std::string> methodsWithOutArgs;
 

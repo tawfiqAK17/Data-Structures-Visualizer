@@ -24,6 +24,8 @@ add_executable(DataStructuresVisualizer main.cpp
         UI/TextHolder.hpp
         DataStructures/Array.cpp
         DataStructures/Array.hpp
+        UI/StaticText.cpp
+        UI/StaticText.hpp
 )
 
 # Include SFML directories

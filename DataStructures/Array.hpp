@@ -11,6 +11,8 @@ public:
     void remove(int val);
     void Clear();
 
+    size_t GetSizeInBytes() override;
+
     int operator[](int idx) const;
 private:
     bool Grow();
