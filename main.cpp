@@ -1,4 +1,4 @@
-#include "UI/MainWindow.h"
+#include "UI/MainWindow.hpp"
 
 int main() {
     MainWindow app;

@@ -2,19 +2,18 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-#include "../UI/NodeRect.h"
-#include "../UI/Visualizer.h"
+#include "NodeRect.hpp"
+#include "Visualizer.hpp"
+#include "../DataStructures/Array.hpp"
 
-class Vector : public Visualizer {
+class ArrayVisualizer : public Visualizer {
 public:
-    Vector(sf::RenderWindow* _window,sf::Font *_font);
+    ArrayVisualizer(sf::RenderWindow* _window, sf::Font *_font);
     void Parse() override;
+    void ReParse(sf::Vector2f first_node_position, sf::Vector2f size) override;
     void Draw() override;
     void ZoomIn(sf::Vector2i mousePos) override;
     void ZoomOut(sf::Vector2i mousePos) override;
     void MethodButtonPressed(int idx, TextHolder *textHolder) override;
 
-    size_t GetSize();
-private:
-    std::vector<int> dataStructure;
 };

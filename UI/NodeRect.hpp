@@ -3,7 +3,7 @@
 
 class NodeRect {
 public:
-    NodeRect(sf::Font *font, int data, sf::Vector2f position);
+    NodeRect(sf::Font *font, int data, sf::Vector2f position, sf::Vector2f size = {200, 90});
     void Draw(sf::RenderWindow *window);
     void ZoomIn(sf::Vector2f position);
     void ZoomOut(sf::Vector2f position);

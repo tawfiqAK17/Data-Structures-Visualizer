@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "Visualizer.h"
+#include "Visualizer.hpp"
 
 Visualizer::Visualizer(sf::RenderWindow *_window, sf::Font *_font) {
     window = _window;
@@ -12,6 +12,10 @@ Visualizer::~Visualizer() {
 }
 
 void Visualizer::Parse() {
+
+}
+
+void Visualizer::ReParse(sf::Vector2f first_node_position, sf::Vector2f size) {
 
 }
 
@@ -38,32 +42,24 @@ void Visualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
 }
 
 void Visualizer::MoveLeft() {
-    if (dataStructure->GetSize() == 0)
-        return;
     for (auto &node: nodes) {
         node->MoveLeft();
     }
 }
 
 void Visualizer::MoveRight() {
-    if (dataStructure->GetSize() == 0)
-        return;
     for (auto &node: nodes) {
         node->MoveRight();
     }
 }
 
 void Visualizer::MoveUp() {
-    if (dataStructure->GetSize() == 0)
-        return;
     for (auto &node: nodes) {
         node->MoveUp();
     }
 }
 
 void Visualizer::MoveDown() {
-    if (dataStructure->GetSize() == 0)
-        return;
     for (auto &node: nodes) {
         node->MoveDown();
     }

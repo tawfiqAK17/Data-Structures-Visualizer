@@ -1,15 +1,16 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
-#include "NodeRect.h"
-#include "../DataStructures/DataStructure.h"
-#include "TextHolder.h"
+#include "NodeRect.hpp"
+#include "../DataStructures/DataStructure.hpp"
+#include "TextHolder.hpp"
 
 class Visualizer {
 public:
     Visualizer(sf::RenderWindow *_window, sf::Font *_font);
     virtual ~Visualizer();
     virtual void Parse();
+    virtual void ReParse(sf::Vector2f first_node_position, sf::Vector2f size);
     virtual void Draw();
     virtual void ZoomIn(sf::Vector2i mousePos);
     virtual void ZoomOut(sf::Vector2i mousePos);
@@ -19,7 +20,8 @@ public:
     void MoveUp();
     void MoveDown();
 
-    std::vector<std::string> availableMethods;
+    std::vector<std::string> methodsWithArgs;
+    std::vector<std::string> methodsWithOutArgs;
 
 protected:
     DataStructure *dataStructure;

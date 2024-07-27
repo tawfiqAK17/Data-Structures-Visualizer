@@ -1,9 +1,9 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
-#include "../DataStructures/Vector.h"
-#include "Button.h"
-#include "TextHolder.h"
+#include "ArrayVisualizer.hpp"
+#include "Button.hpp"
+#include "TextHolder.hpp"
 
 class MainWindow {
 private:

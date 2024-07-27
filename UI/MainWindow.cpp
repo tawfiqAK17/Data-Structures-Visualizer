@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <utility>
-#include "MainWindow.h"
+#include "MainWindow.hpp"
 
 #define IN_USE_BUTTON_COLOR {64, 64, 64, 250}
 #define NON_IN_USE_BUTTON_COLOR { 176, 176, 176, 250}
@@ -37,6 +37,8 @@ bool MainWindow::ZoomButton::InUse() {
 
 
 MainWindow::MainWindow() {
+    srand(time(0));
+
     InitiateFields();
 }
 
@@ -46,7 +48,7 @@ void MainWindow::InitiateFields() {
     window->setPosition({0, 0});
 
     font = std::make_unique<sf::Font>(sf::Font());
-    font->loadFromFile("font.ttf");
+    font->loadFromFile("UI/font.ttf");
     visualisationArea = std::make_unique<sf::RectangleShape>(sf::RectangleShape(
             {static_cast<float>(window->getSize().x) * 3.f / 4, static_cast<float>(window->getSize().y)}));
     visualisationArea->setPosition(window->getSize().x / 4, 0);
@@ -59,7 +61,7 @@ void MainWindow::InitiateFields() {
     controlsArea->setPosition(0, 0);
     controlsArea->setFillColor({169, 169, 169, 255});
 
-    vec = new Vector(window.get(), font.get());
+    vec = new ArrayVisualizer(window.get(), font.get());
     vec->Parse();
 
 
@@ -105,20 +107,30 @@ void MainWindow::InitiateButtons() {
                                 vec->MoveUp();
                             })));
 
-    for (int i = 0; i < vec->availableMethods.size(); i++) {
+    for (int i = 0; i < vec->methodsWithArgs.size(); i++) {
         textHolders.push_back(
                 std::make_unique<TextHolder>(
-                        TextHolder(window.get(), sf::Vector2f(10 + 10 + 100, 100 + i * (50 + 8)),
-                                   {100, 50}, "0", font.get()
+                        TextHolder(window.get(), sf::Vector2f(10 + 10 + controlsArea->getSize().x / 2 - 20, 100 + i * (50 + 8)),
+                                   sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), "0", font.get()
                         )));
         buttons.push_back(
                 std::make_unique<Button>(
                         Button(window.get(), sf::Vector2f(10, 100 + i * (50 + 8)),
-                               {100, 50}, vec->availableMethods[i], font.get(), [this, i]() {
+                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), vec->methodsWithArgs[i], font.get(), [this, i]() {
                                     vec->MethodButtonPressed(i, textHolders[i].get());
                                 })));
 
     }
+    for (int i = 0; i < vec->methodsWithOutArgs.size(); i++) {
+        buttons.push_back(
+                std::make_unique<Button>(
+                        Button(window.get(), sf::Vector2f(10, 100 + (i + vec->methodsWithArgs.size()) * (50 + 8)),
+                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), vec->methodsWithOutArgs[i], font.get(), [this, i]() {
+                                    vec->MethodButtonPressed(i, nullptr);
+                                })));
+
+    }
+
 
 }
 

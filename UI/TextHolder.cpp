@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "TextHolder.h"
+#include "TextHolder.hpp"
 
 TextHolder::TextHolder(sf::RenderWindow *_window, sf::Vector2f position, sf::Vector2f size, sf::String place_holder,
                        sf::Font *_font) : window(_window){

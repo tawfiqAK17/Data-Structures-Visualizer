@@ -1,9 +1,9 @@
-#include "NodeRect.h"
+#include "NodeRect.hpp"
 
 
-NodeRect::NodeRect(sf::Font *font, int data, sf::Vector2f position) {
+NodeRect::NodeRect(sf::Font *font, int data, sf::Vector2f position, sf::Vector2f size) {
     nodeRect = std::make_unique<sf::RectangleShape>(sf::RectangleShape());
-    nodeRect->setSize(sf::Vector2f (200, 90));
+    nodeRect->setSize(size);
     nodeRect->setPosition(position);
     nodeRect->setOutlineThickness(1);
     nodeRect->setOutlineColor(sf::Color::Black);
