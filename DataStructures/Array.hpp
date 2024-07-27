@@ -8,7 +8,7 @@ public:
     Array() = default;
     ~Array() override;
     void Add(int val);
-    void remove(int val);
+    void Remove(int val);
     void Clear();
 
     size_t GetSizeInBytes() override;

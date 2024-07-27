@@ -9,7 +9,7 @@ void Array::Add(int val) {
         data[size++] = val;
 }
 
-void Array::remove(int val) {
+void Array::Remove(int val) {
     if (size == 1 && data[0] == val) {
         if (Shrink())
             size--;

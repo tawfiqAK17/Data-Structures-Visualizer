@@ -13,7 +13,7 @@ private:
         ZoomButton(sf::RenderWindow* _window, sf::Vector2f position, sf::Vector2f size, sf::String text, sf::Font *font);
         bool HandelClickEvent(sf::Vector2i mouse_position) override;
         void ChangeTheState();
-        bool InUse();
+        bool InUse() const;
     private:
         bool inUse = false;
     };
@@ -44,6 +44,7 @@ private:
     std::vector<std::unique_ptr<TextHolder>> textHolders;
 
     std::unique_ptr<StaticText> sizeInBytes;
+    std::unique_ptr<StaticText> lastMethodExecutionTime;
 
     TextHolder *inUseTextHolder = nullptr;
 

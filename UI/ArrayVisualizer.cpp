@@ -8,7 +8,7 @@ ArrayVisualizer::ArrayVisualizer(sf::RenderWindow *_window, sf::Font *_font) : V
 
     dataStructure = new Array;
 
-    methodsWithArgs.emplace_back("Push_back");
+    methodsWithArgs.emplace_back("Add");
     methodsWithArgs.emplace_back("Remove");
     methodsWithArgs.emplace_back("Add Random");
 
@@ -80,26 +80,28 @@ void ArrayVisualizer::ZoomOut(sf::Vector2i mousePos) {
     }
 }
 
-void ArrayVisualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
+unsigned long ArrayVisualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
+    unsigned long executionTime = 0;
     if (textHolder) { // call to a method with args
         int number = std::stoi(textHolder->GetText().toAnsiString());
         switch (idx) {
             case 0:
-                dynamic_cast<Array *>(dataStructure)->Add(number);
+                executionTime = Benchmark([this, number](){dynamic_cast<Array *>(dataStructure)->Add(number); });
                 break;
             case 1:
-                dynamic_cast<Array *>(dataStructure)->remove(number);
+                executionTime = Benchmark([this, number](){ dynamic_cast<Array *>(dataStructure)->Remove(number); });
+
                 break;
             case 2:
                 for (int i = 0; i < number; i++) {
-                    dynamic_cast<Array *>(dataStructure)->Add(rand());
+                    executionTime += Benchmark([this, number](){dynamic_cast<Array *>(dataStructure)->Add(rand()); });
                 }
                 break;
         }
     } else { // call to a method without args
         switch (idx) {
             case 0:
-                dynamic_cast<Array *>(dataStructure)->Clear();
+                executionTime = Benchmark([this](){dynamic_cast<Array *>(dataStructure)->Clear(); });
                 break;
         }
     }
@@ -108,5 +110,7 @@ void ArrayVisualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
     else {
         ReParse(nodes[0]->GetPosition(), nodes[0]->GetSize());
     }
+    return executionTime;
 }
+
 

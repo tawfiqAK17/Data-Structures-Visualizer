@@ -1,6 +1,7 @@
 
-#include <iostream>
 #include "Visualizer.hpp"
+#include <iostream>
+#include <chrono>
 
 Visualizer::Visualizer(sf::RenderWindow *_window, sf::Font *_font) {
     window = _window;
@@ -11,12 +12,11 @@ Visualizer::~Visualizer() {
     delete dataStructure;
 }
 
-void Visualizer::Parse() {
-
-}
-
-void Visualizer::ReParse(sf::Vector2f first_node_position, sf::Vector2f size) {
-
+unsigned long Visualizer::Benchmark(const std::function<void(void)>& function) {
+    auto start = std::chrono::steady_clock::now();
+    function();
+    auto end = std::chrono::steady_clock::now();
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 }
 
 void Visualizer::Draw() {
@@ -28,17 +28,6 @@ void Visualizer::Draw() {
 
         node->Draw(window);
     }
-}
-
-void Visualizer::ZoomIn(sf::Vector2i mousePos) {
-
-}
-
-void Visualizer::ZoomOut(sf::Vector2i mousePos) {
-
-}
-
-void Visualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
 }
 
 void Visualizer::MoveLeft() {

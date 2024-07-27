@@ -40,9 +40,9 @@ bool TextHolder::HandelClickEvent(sf::Vector2i mouse_position) {
 
 void TextHolder::Draw() const {
     if (inUse)
-        text->setFillColor({255, 0, 0, 255});
+        text->setFillColor({0, 0, 0, 255});
     else
-        text->setFillColor({0, 255, 0, 255});
+        text->setFillColor({0, 0, 0, 100});
     window->draw(*rectangle);
     window->draw(*text);
 }
