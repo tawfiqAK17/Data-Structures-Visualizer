@@ -116,22 +116,33 @@ void MainWindow::InitiateButtons() {
                 std::make_unique<Button>(
                         Button(window.get(), sf::Vector2f(10, 100.f + static_cast<float>(i) * (50 + 8)),
                                sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), array->methodsWithArgs[i], font.get(), [this, i]() {
-                                    lastMethodExecutionTime->SetText("Execution time: " + std::to_string(static_cast<float>(array->MethodButtonPressed(i, textHolders[i].get())) / 1000.f) + " us");
+                                    auto benchmark_result = array->MethodButtonPressed(i, textHolders[i].get());
+                                    if (benchmark_result.second)
+                                        methodReturnState->SetText("Returned state: success");
+                                    else
+                                        methodReturnState->SetText("Returned state: failed");
+
+                                    methodExecutionTime->SetText("Execution time: " + std::to_string(static_cast<float>(benchmark_result.first) / 1000.f) + " us");
                                 })));
 
     }
     for (int i = 0; i < array->methodsWithOutArgs.size(); i++) {
         buttons.push_back(
                 std::make_unique<Button>(
-                        Button(window.get(), sf::Vector2f(10, 100.f + 100.f + static_cast<float>(i + array->methodsWithArgs.size()) * (50 + 8)),
+                        Button(window.get(), sf::Vector2f(10, 100.f + static_cast<float>(i + array->methodsWithArgs.size()) * (50 + 8)),
                                sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), array->methodsWithOutArgs[i], font.get(), [this, i]() {
-                                    lastMethodExecutionTime->SetText("Execution time: " + std::to_string(static_cast<float>(array->MethodButtonPressed(i, nullptr)) / 1000.f) + " us");
+                                    auto benchmark_result = array->MethodButtonPressed(i, nullptr);
+                                    if (benchmark_result.second)
+                                        methodReturnState->SetText("Returned state: success");
+                                    else
+                                        methodReturnState->SetText("Returned state: failed");
+                                    methodExecutionTime->SetText("Execution time: " + std::to_string(static_cast<float>(benchmark_result.first) / 1000.f) + " us");
                                 })));
 
     }
-
+    methodReturnState = std::make_unique<StaticText>(StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120 - 50 - 20 - 50 - 20), sf::Vector2f(controlsArea->getSize().x - 20, 50), "Returned state: Non", font.get()));
+    methodExecutionTime = std::make_unique<StaticText>(StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120 - 50 - 20), sf::Vector2f(controlsArea->getSize().x - 20, 50), "Execution time: 0 us", font.get()));
     sizeInBytes = std::make_unique<StaticText>(StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120), sf::Vector2f(controlsArea->getSize().x - 20, 50), "Used memory: 0 Bytes", font.get()));
-    lastMethodExecutionTime = std::make_unique<StaticText>(StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120 - 50 - 20), sf::Vector2f(controlsArea->getSize().x - 20, 50), "Execution time: 0 us", font.get()));
 }
 
 void MainWindow::Run() {
@@ -282,8 +293,9 @@ void MainWindow::DrawComponents() const {
     window->draw(*controlsArea);
     zoomInButton->Draw();
     zoomOutButton->Draw();
+    methodReturnState->Draw();
+    methodExecutionTime->Draw();
     sizeInBytes->Draw();
-    lastMethodExecutionTime->Draw();
     for (auto &button: buttons) {
         button->Draw();
     }

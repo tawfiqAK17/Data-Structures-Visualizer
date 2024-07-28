@@ -14,6 +14,6 @@ public:
     void Draw() override;
     void ZoomIn(sf::Vector2i mousePos) override;
     void ZoomOut(sf::Vector2i mousePos) override;
-    unsigned long MethodButtonPressed(int idx, TextHolder *textHolder) override;
+    std::pair<unsigned long, bool> MethodButtonPressed(int idx, TextHolder *textHolder) override;
 
 };

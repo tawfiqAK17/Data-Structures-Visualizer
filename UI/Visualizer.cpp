@@ -12,11 +12,11 @@ Visualizer::~Visualizer() {
     delete dataStructure;
 }
 
-unsigned long Visualizer::Benchmark(const std::function<void(void)>& function) {
+std::pair<unsigned long, bool> Visualizer::Benchmark(const std::function<bool(void)>& function) {
     auto start = std::chrono::steady_clock::now();
-    function();
+    auto fun_return_state = function();
     auto end = std::chrono::steady_clock::now();
-    return std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    return { std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count(), fun_return_state};
 }
 
 void Visualizer::Draw() {

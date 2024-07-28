@@ -7,11 +7,12 @@ class Array : public DataStructure {
 public:
     Array() = default;
     ~Array() override;
-    void Add(int val);
-    void Remove(int val);
-    void RemoveAt(int idx);
-    void Find(int val);
-    void Clear();
+    bool Add(int val);
+    bool AddRandom(int number);
+    bool Remove(int val);
+    bool RemoveAt(int idx);
+    bool Find(int val);
+    bool Clear();
 
     size_t GetSizeInBytes() override;
 

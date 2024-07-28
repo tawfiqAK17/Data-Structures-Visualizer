@@ -1,15 +1,25 @@
+#include <cstdlib>
+#include <ctime>
 #include "Array.hpp"
 
 Array::~Array() {
     Clear();
 }
 
-void Array::Add(int val) {
-    if (Grow())
-        data[size++] = val;
+bool Array::Add(int val) {
+    Grow();
+    data[size++] = val;
+    return true;
 }
 
-void Array::Remove(int val) {
+bool Array::AddRandom(int number) {
+    for (int i = 0; i < number; i++) {
+        Add(rand() % 1000);
+    }
+    return true;
+}
+
+bool Array::Remove(int val) {
     for (int i = 0; i < size; i++) {
         if (data[i] == val) {
             for (int j = i; j < size - 1; j++) {
@@ -19,14 +29,15 @@ void Array::Remove(int val) {
                 size--;
             else
                 size = 0;
-            return;
+            return true;
         }
     }
+    return false;
 }
 
-void Array::RemoveAt(int idx) {
+bool Array::RemoveAt(int idx) {
     if (idx >= size || idx < 0)
-        return;
+        return false;
     for (int i = 0; i < size; i++) {
         if (i == idx) {
             for (int j = i; j < size - 1; j++) {
@@ -36,21 +47,24 @@ void Array::RemoveAt(int idx) {
                 size--;
             else
                 size = 0;
-            return;
+            return true;
         }
     }
+    return true;
 }
 
-void Array::Find(int val) {
+bool Array::Find(int val) {
     for (int i = 0; i < size; i++)
         if (data[i] == val)
-            return;
+            return true;
+    return false;
 }
 
-void Array::Clear() {
+bool Array::Clear() {
     delete[] data;
     data = nullptr;
     size = 0;
+    return true;
 }
 
 bool Array::Grow() {

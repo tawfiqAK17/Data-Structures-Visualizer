@@ -14,8 +14,8 @@ public:
     virtual void Draw();
     virtual void ZoomIn(sf::Vector2i mousePos) = 0;
     virtual void ZoomOut(sf::Vector2i mousePos) = 0;
-    virtual unsigned long MethodButtonPressed(int idx, TextHolder *textHolder) = 0;
-    unsigned long Benchmark(const std::function<void(void)>& function);
+    virtual std::pair<unsigned long, bool> MethodButtonPressed(int idx, TextHolder *textHolder) = 0;
+    std::pair<unsigned long, bool> Benchmark(const std::function<bool(void)>& function);
     void MoveLeft();
     void MoveRight();
     void MoveUp();

@@ -43,8 +43,9 @@ private:
     std::vector<std::unique_ptr<Button>> buttons;
     std::vector<std::unique_ptr<TextHolder>> textHolders;
 
+    std::unique_ptr<StaticText> methodReturnState;
+    std::unique_ptr<StaticText> methodExecutionTime;
     std::unique_ptr<StaticText> sizeInBytes;
-    std::unique_ptr<StaticText> lastMethodExecutionTime;
 
     TextHolder *inUseTextHolder = nullptr;
 
