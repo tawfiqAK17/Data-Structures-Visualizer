@@ -1,19 +1,15 @@
-#include "NodeRect.h"
+#include "NodeRect.hpp"
 
 
-NodeRect::NodeRect(int data, sf::Vector2f position) {
+NodeRect::NodeRect(sf::Font *font, int data, sf::Vector2f position, sf::Vector2f size) {
     nodeRect = std::make_unique<sf::RectangleShape>(sf::RectangleShape());
-    nodeRect->setSize(sf::Vector2f (200, 90));
+    nodeRect->setSize(size);
     nodeRect->setPosition(position);
     nodeRect->setOutlineThickness(1);
     nodeRect->setOutlineColor(sf::Color::Black);
     nodeRect->setFillColor({255, 218, 185, 255});
 
-
-    nodeFont = std::make_unique<sf::Font>(sf::Font());
-    nodeFont->loadFromFile("font.ttf");
-
-    nodeText = std::make_unique<sf::Text>(sf::Text(std::to_string(data), *nodeFont));
+    nodeText = std::make_unique<sf::Text>(sf::Text(std::to_string(data), *font));
     nodeText->setFillColor(sf::Color::Black);
 }
 
@@ -31,12 +27,12 @@ sf::RectangleShape *NodeRect::GetRect() const {
     return nodeRect.get();
 }
 
-void NodeRect::ZomIn(sf::Vector2f position) {
+void NodeRect::ZoomIn(sf::Vector2f position) {
     nodeRect->setSize(nodeRect->getSize() + sf::Vector2f(nodeRect->getSize().x / 4, nodeRect->getSize().y / 4));
     nodeRect->setPosition(position);
 }
 
-void NodeRect::ZomOut(sf::Vector2f position) {
+void NodeRect::ZoomOut(sf::Vector2f position) {
     nodeRect->setSize(nodeRect->getSize() - sf::Vector2f(nodeRect->getSize().x / 4, nodeRect->getSize().y / 4));
     nodeRect->setPosition(position);
 }
