@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 
 #include "ArrayVisualizer.hpp"
+#include "LinkedListVisualizer.h"
 #include "Button.hpp"
 #include "TextHolder.hpp"
 #include "StaticText.hpp"

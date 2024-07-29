@@ -60,8 +60,8 @@ void MainWindow::InitiateFields() {
     controlsArea->setPosition(0, 0);
     controlsArea->setFillColor({169, 169, 169, 255});
 
-    array = new ArrayVisualizer(window.get(), font.get());
-    array->Parse();
+    array = new LinkedListVisualizer(window.get(), font.get());
+    array->ParseNodes();
 
 
     InitiateButtons();

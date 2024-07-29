@@ -26,6 +26,12 @@ add_executable(DataStructuresVisualizer main.cpp
         DataStructures/Array.hpp
         UI/StaticText.cpp
         UI/StaticText.hpp
+        DataStructures/LinkedList.cpp
+        DataStructures/LinkedList.h
+        UI/LinkedListVisualizer.cpp
+        UI/LinkedListVisualizer.h
+        UI/Arrow.cpp
+        UI/Arrow.h
 )
 
 # Include SFML directories

@@ -2,7 +2,6 @@
 #include "ArrayVisualizer.hpp"
 
 
-#define MAX_NODE_WIDTH 600
 
 ArrayVisualizer::ArrayVisualizer(sf::RenderWindow *_window, sf::Font *_font) : Visualizer(_window, _font) {
 
@@ -14,19 +13,19 @@ ArrayVisualizer::ArrayVisualizer(sf::RenderWindow *_window, sf::Font *_font) : V
     methodsWithArgs.emplace_back("Remove at");
     methodsWithArgs.emplace_back("Find");
 
-    methodsWithOutArgs.emplace_back("Bubble sort (not yet)");
-    methodsWithOutArgs.emplace_back("Selection sort (not yet)");
-    methodsWithOutArgs.emplace_back("Merge sort (not yet)");
+    methodsWithOutArgs.emplace_back("Bubble sort");
+    methodsWithOutArgs.emplace_back("Selection sort");
+    methodsWithOutArgs.emplace_back("Merge sort");
     methodsWithOutArgs.emplace_back("Quick sort (not yet)");
     methodsWithOutArgs.emplace_back("Clear");
 
 }
 
-void ArrayVisualizer::Parse() {
+void ArrayVisualizer::ParseNodes() {
     sf::Vector2f currentPos = sf::Vector2f(window->getSize().x / 4 + 50, 500);
 
+    Array *const pArray = dynamic_cast<Array *>(dataStructure);
     for (int i = 0; i < dataStructure->GetSize(); i++) {
-        Array *const pArray = dynamic_cast<Array *>(dataStructure);
         std::unique_ptr<NodeRect> node = std::make_unique<NodeRect>(
                 NodeRect(font, (*pArray)[i], currentPos));
 
@@ -35,26 +34,16 @@ void ArrayVisualizer::Parse() {
     }
 }
 
-void ArrayVisualizer::ReParse(sf::Vector2f first_node_position, sf::Vector2f size) {
+void ArrayVisualizer::ReParseNodes(sf::Vector2f first_node_position, sf::Vector2f size) {
     nodes.clear();
     sf::Vector2f currentPos = first_node_position;
 
+    Array *const pArray = dynamic_cast<Array *>(dataStructure);
     for (int i = 0; i < dataStructure->GetSize(); i++) {
-        Array *const pArray = dynamic_cast<Array *>(dataStructure);
         std::unique_ptr<NodeRect> node = std::make_unique<NodeRect>(
                 NodeRect(font, (*pArray)[i], currentPos, size));
         currentPos += sf::Vector2f(node->GetSize().x, 0);
         nodes.push_back(std::move(node));
-    }
-}
-
-void ArrayVisualizer::Draw() {
-    for (auto &node: nodes) {
-        if (node->GetPosition().x > window->getSize().x ||
-            node->GetPosition().x + node->GetSize().x < 0 ||
-            node->GetPosition().y > window->getSize().y || node->GetPosition().y + node->GetSize().y < 0)
-            continue;
-        node->Draw(window);
     }
 }
 
@@ -114,15 +103,24 @@ std::pair<unsigned long, bool> ArrayVisualizer::MethodButtonPressed(int idx, Tex
         }
     } else { // call to a method without args
         switch (idx) {
+            case 0:
+                executionInfo = Benchmark([this]() { return dynamic_cast<Array *>(dataStructure)->BubbleSort(); });
+                break;
+            case 1:
+                executionInfo = Benchmark([this]() { return dynamic_cast<Array *>(dataStructure)->SelectionSort(); });
+                break;
+            case 2:
+                executionInfo = Benchmark([this]() { return dynamic_cast<Array *>(dataStructure)->MergeSort(); });
+                break;
             case 4:
                 executionInfo = Benchmark([this]() { return dynamic_cast<Array *>(dataStructure)->Clear(); });
                 break;
         }
     }
     if (nodes.empty())
-        Parse();
+        ParseNodes();
     else {
-        ReParse(nodes[0]->GetPosition(), nodes[0]->GetSize());
+        ReParseNodes(nodes[0]->GetPosition(), nodes[0]->GetSize());
     }
     return executionInfo;
 }

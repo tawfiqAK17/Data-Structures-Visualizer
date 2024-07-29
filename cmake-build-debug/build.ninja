@@ -109,6 +109,24 @@ build CMakeFiles/DataStructuresVisualizer.dir/UI/StaticText.cpp.o: CXX_COMPILER_
   OBJECT_DIR = CMakeFiles/DataStructuresVisualizer.dir
   OBJECT_FILE_DIR = CMakeFiles/DataStructuresVisualizer.dir/UI
 
+build CMakeFiles/DataStructuresVisualizer.dir/DataStructures/LinkedList.cpp.o: CXX_COMPILER__DataStructuresVisualizer_unscanned_Debug /home/tawfiq/CLionProjects/DataStructuresVisualizer/DataStructures/LinkedList.cpp || cmake_object_order_depends_target_DataStructuresVisualizer
+  DEP_FILE = CMakeFiles/DataStructuresVisualizer.dir/DataStructures/LinkedList.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/DataStructuresVisualizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/DataStructuresVisualizer.dir/DataStructures
+
+build CMakeFiles/DataStructuresVisualizer.dir/UI/LinkedListVisualizer.cpp.o: CXX_COMPILER__DataStructuresVisualizer_unscanned_Debug /home/tawfiq/CLionProjects/DataStructuresVisualizer/UI/LinkedListVisualizer.cpp || cmake_object_order_depends_target_DataStructuresVisualizer
+  DEP_FILE = CMakeFiles/DataStructuresVisualizer.dir/UI/LinkedListVisualizer.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/DataStructuresVisualizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/DataStructuresVisualizer.dir/UI
+
+build CMakeFiles/DataStructuresVisualizer.dir/UI/Arrow.cpp.o: CXX_COMPILER__DataStructuresVisualizer_unscanned_Debug /home/tawfiq/CLionProjects/DataStructuresVisualizer/UI/Arrow.cpp || cmake_object_order_depends_target_DataStructuresVisualizer
+  DEP_FILE = CMakeFiles/DataStructuresVisualizer.dir/UI/Arrow.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/DataStructuresVisualizer.dir
+  OBJECT_FILE_DIR = CMakeFiles/DataStructuresVisualizer.dir/UI
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target DataStructuresVisualizer
@@ -117,7 +135,7 @@ build CMakeFiles/DataStructuresVisualizer.dir/UI/StaticText.cpp.o: CXX_COMPILER_
 #############################################
 # Link the executable DataStructuresVisualizer
 
-build DataStructuresVisualizer: CXX_EXECUTABLE_LINKER__DataStructuresVisualizer_Debug CMakeFiles/DataStructuresVisualizer.dir/main.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/MainWindow.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/ArrayVisualizer.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/NodeRect.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/Button.cpp.o CMakeFiles/DataStructuresVisualizer.dir/DataStructures/DataStructure.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizer.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/TextHolder.cpp.o CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Array.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/StaticText.cpp.o | /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
+build DataStructuresVisualizer: CXX_EXECUTABLE_LINKER__DataStructuresVisualizer_Debug CMakeFiles/DataStructuresVisualizer.dir/main.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/MainWindow.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/ArrayVisualizer.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/NodeRect.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/Button.cpp.o CMakeFiles/DataStructuresVisualizer.dir/DataStructures/DataStructure.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizer.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/TextHolder.cpp.o CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Array.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/StaticText.cpp.o CMakeFiles/DataStructuresVisualizer.dir/DataStructures/LinkedList.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/LinkedListVisualizer.cpp.o CMakeFiles/DataStructuresVisualizer.dir/UI/Arrow.cpp.o | /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
   FLAGS = -g
   LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1  /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1  /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
   OBJECT_DIR = CMakeFiles/DataStructuresVisualizer.dir
