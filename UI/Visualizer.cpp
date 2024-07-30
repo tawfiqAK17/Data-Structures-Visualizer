@@ -23,6 +23,8 @@ std::pair<unsigned long, bool> Visualizer::Benchmark(const std::function<bool(vo
 
 void Visualizer::ParseArrows() {
     arrows.clear();
+    if (nodes.empty())
+        return;
     for (int i = 0; i < nodes.size() - 1; i++) {
         arrows.push_back(std::make_unique<Arrow>(Arrow(*nodes[i], *nodes[i + 1])));
     }

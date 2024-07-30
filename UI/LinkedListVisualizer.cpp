@@ -1,15 +1,16 @@
+#include <iostream>
 #include "LinkedListVisualizer.h"
 #include "../DataStructures/LinkedList.h"
 
 LinkedListVisualizer::LinkedListVisualizer(sf::RenderWindow *_window, sf::Font *_font) : Visualizer(_window, _font) {
     dataStructure = new LinkedList;
 
-    dynamic_cast<LinkedList *>(dataStructure)->Push(3);
-    dynamic_cast<LinkedList *>(dataStructure)->Push(8);
-    dynamic_cast<LinkedList *>(dataStructure)->Push(9);
-
     methodsWithArgs.emplace_back("Push");
+    methodsWithArgs.emplace_back("Push random");
+    methodsWithArgs.emplace_back("Remove");
     methodsWithOutArgs.emplace_back("Pop");
+    methodsWithOutArgs.emplace_back("Revers");
+    methodsWithOutArgs.emplace_back("Clear");
 }
 
 void LinkedListVisualizer::ParseNodes() {
@@ -34,10 +35,7 @@ void LinkedListVisualizer::ParseNodes() {
 void LinkedListVisualizer::ReParseNodes(sf::Vector2f first_node_position, sf::Vector2f size) {
     nodes.clear();
     sf::Vector2f currentPos = first_node_position;
-    auto head = dynamic_cast<LinkedList *>(dataStructure)->GetHead();
-    if (!head)
-        return;
-    auto temp = head;
+    auto temp = dynamic_cast<LinkedList *>(dataStructure)->GetHead();
     while (temp) {
         std::unique_ptr<NodeRect> node = std::make_unique<NodeRect>(
                 NodeRect(font, temp->val, currentPos, size));
@@ -45,7 +43,6 @@ void LinkedListVisualizer::ReParseNodes(sf::Vector2f first_node_position, sf::Ve
         nodes.push_back(std::move(node));
         temp = temp->next;
     }
-
     ParseArrows();
 }
 
@@ -89,6 +86,16 @@ std::pair<unsigned long, bool> LinkedListVisualizer::MethodButtonPressed(int idx
                     return dynamic_cast<LinkedList *>(dataStructure)->Push(parameter);
                 });
                 break;
+            case 1:
+                executionInfo = Benchmark([this, parameter]() {
+                    return dynamic_cast<LinkedList *>(dataStructure)->PushRandom(parameter);
+                });
+                break;
+            case 2:
+                executionInfo = Benchmark([this, parameter]() {
+                    return dynamic_cast<LinkedList *>(dataStructure)->Remove(parameter);
+                });
+                break;
         }
     } else {
         switch (idx) {
@@ -97,10 +104,21 @@ std::pair<unsigned long, bool> LinkedListVisualizer::MethodButtonPressed(int idx
                     return dynamic_cast<LinkedList *>(dataStructure)->Pop();
                 });
                 break;
+            case 1:
+                executionInfo = Benchmark([this]() {
+                    return dynamic_cast<LinkedList *>(dataStructure)->Revers();
+                });
+                break;
+            case 2:
+                executionInfo = Benchmark([this]() {
+                    return dynamic_cast<LinkedList *>(dataStructure)->Clear();
+                });
+                break;
         }
     }
-    if (nodes.empty())
+    if (nodes.empty()) {
         ParseNodes();
+    }
     else {
         ReParseNodes(nodes[0]->GetPosition(), nodes[0]->GetSize());
     }

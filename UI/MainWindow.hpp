@@ -26,6 +26,7 @@ private:
     void InitiateFields();
     void InitiateButtons();
     void HandelEvents();
+    void ChangeDataStructure(int idx);
     void HandelMouseEvent(sf::Vector2i mouse_position);
     void HandelTexHolderEvents(sf::Event &event);
     void DrawComponents() const;
@@ -34,7 +35,11 @@ private:
     std::unique_ptr<sf::Font> font;
     std::unique_ptr<sf::RenderWindow> window;
 
-    Visualizer *array;
+    Visualizer *visualizer;
+    std::vector<std::string> availableDataStructures;
+    std::unique_ptr<Button> selectADataStructure;
+    std::vector<std::unique_ptr<Button>> dataStructuresButtons;
+    bool selectingADataStructure = false;
 
     std::unique_ptr<sf::RectangleShape> visualisationArea;
     std::unique_ptr<sf::RectangleShape> controlsArea;

@@ -14,7 +14,7 @@ bool Array::Add(int val) {
 
 bool Array::AddRandom(int number) {
     for (int i = 0; i < number; i++) {
-        Add(rand() % 20);
+        Add(rand() % 1000);
     }
     return true;
 }

@@ -13,10 +13,13 @@ private:
         Node *next;
     };
 public:
+    ~LinkedList() override;
     bool Push(int val);
+    bool PushRandom(int number);
     bool Pop();
-    bool Remove();
+    bool Remove(int val);
     bool Revers();
+    bool Clear();
     unsigned long GetSizeInBytes() override;
 
     [[nodiscard]] Node* GetHead() const;

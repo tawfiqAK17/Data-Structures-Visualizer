@@ -31,6 +31,13 @@ bool Button::HandelClickEvent(sf::Vector2i mouse_position) {
     return false;
 }
 
+void Button::SetText(std::string text) {
+    buttonText->setString(text);
+    buttonText->setPosition(buttonRect->getPosition() + sf::Vector2f(
+            buttonRect->getSize().x / 2 - buttonText->getCharacterSize() / 2 * buttonText->getString().getSize() / 2,
+            buttonRect->getSize().y / 2 - buttonText->getCharacterSize() / 2));
+}
+
 void Button::Draw() {
     window->draw(*buttonRect);
     window->draw(*buttonText);

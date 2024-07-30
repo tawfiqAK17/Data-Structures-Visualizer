@@ -16,7 +16,7 @@ Arrow::Arrow(NodeRect &from, NodeRect &to) {
     else
         rectangle->setRotation(static_cast<float>(angle) * (180 / M_PI) + 180);
 
-    rectangle->setSize({static_cast<float>(length), from.GetSize().y / 18.f}); // 1 / 18 of the node height is the arrow height
+    rectangle->setSize({static_cast<float>(length), from.GetSize().y / 20.f}); // 1 / 20 of the node height is the arrow height
     rectangle->setPosition(fromCenter);
 
     rectangle->setFillColor(sf::Color::Black);

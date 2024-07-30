@@ -36,7 +36,7 @@ bool MainWindow::ZoomButton::InUse() const {
 
 
 MainWindow::MainWindow() {
-    srand(time(nullptr));
+    srand(time(0));
 
     InitiateFields();
 }
@@ -60,9 +60,10 @@ void MainWindow::InitiateFields() {
     controlsArea->setPosition(0, 0);
     controlsArea->setFillColor({169, 169, 169, 255});
 
-    array = new LinkedListVisualizer(window.get(), font.get());
-    array->ParseNodes();
-
+    visualizer = new ArrayVisualizer(window.get(), font.get());
+    visualizer->ParseNodes();
+    availableDataStructures.emplace_back("Array");
+    availableDataStructures.emplace_back("Linked list");
 
     InitiateButtons();
 
@@ -70,6 +71,24 @@ void MainWindow::InitiateFields() {
 }
 
 void MainWindow::InitiateButtons() {
+    selectADataStructure = std::make_unique<Button>(
+            Button(window.get(),
+                   sf::Vector2f(visualisationArea->getPosition().x + 10, 10),
+                   {200, 50}, availableDataStructures[0], font.get(), [this]() {
+                        selectingADataStructure = !selectingADataStructure;
+                    }));
+    for (int i = 0; i < availableDataStructures.size(); i++) {
+        dataStructuresButtons.push_back(
+                std::make_unique<Button>(
+                        Button(window.get(), sf::Vector2f(selectADataStructure->GetPosition().x + 200,
+                                                          selectADataStructure->GetPosition().y + 50.f * i),
+                               {200, 50}, availableDataStructures[i], font.get(), [this, i]() {
+                                    ChangeDataStructure(i);
+                                    selectingADataStructure = false;
+                                })
+                )
+        );
+    }
     zoomInButton = std::make_unique<ZoomButton>(
             ZoomButton(window.get(),
                        sf::Vector2f(visualisationArea->getPosition().x + 10, visualisationArea->getSize().y - 120),
@@ -82,67 +101,81 @@ void MainWindow::InitiateButtons() {
 
     buttons.push_back(
             std::make_unique<Button>(
-                    Button(window.get(), sf::Vector2f(static_cast<float>(window->getSize().x) - 50 - 10, static_cast<float>(window->getSize().y) - 120),
+                    Button(window.get(), sf::Vector2f(static_cast<float>(window->getSize().x) - 50 - 10,
+                                                      static_cast<float>(window->getSize().y) - 120),
                            {50, 50}, "right", font.get(), [this]() {
-                                array->MoveRight();
+                                visualizer->MoveRight();
                             })));
 
     buttons.push_back(
             std::make_unique<Button>(
                     Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "left", font.get(), [this]() {
-                                array->MoveLeft();
+                                visualizer->MoveLeft();
                             })));
     buttons.push_back(
             std::make_unique<Button>(
                     Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "down", font.get(), [this]() {
-                                array->MoveDown();
+                                visualizer->MoveDown();
                             })));
     buttons.push_back(
             std::make_unique<Button>(
                     Button(window.get(), buttons.back()->GetPosition() - sf::Vector2f(50, 0),
                            {50, 50}, "up", font.get(), [this]() {
-                                array->MoveUp();
+                                visualizer->MoveUp();
                             })));
 
-    for (int i = 0; i < array->methodsWithArgs.size(); i++) {
+    for (int i = 0; i < visualizer->methodsWithArgs.size(); i++) {
         textHolders.push_back(
                 std::make_unique<TextHolder>(
-                        TextHolder(window.get(), sf::Vector2f(10 + 10 + controlsArea->getSize().x / 2 - 20, 100.f + static_cast<float>(i) * (50 + 8)),
+                        TextHolder(window.get(), sf::Vector2f(10 + 10 + controlsArea->getSize().x / 2 - 20,
+                                                              100.f + static_cast<float>(i) * (50 + 8)),
                                    sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), "0", font.get()
                         )));
         buttons.push_back(
                 std::make_unique<Button>(
                         Button(window.get(), sf::Vector2f(10, 100.f + static_cast<float>(i) * (50 + 8)),
-                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), array->methodsWithArgs[i], font.get(), [this, i]() {
-                                    auto benchmark_result = array->MethodButtonPressed(i, textHolders[i].get());
+                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), visualizer->methodsWithArgs[i],
+                               font.get(), [this, i]() {
+                                    auto benchmark_result = visualizer->MethodButtonPressed(i, textHolders[i].get());
                                     if (benchmark_result.second)
                                         methodReturnState->SetText("Returned state: success");
                                     else
                                         methodReturnState->SetText("Returned state: failed");
 
-                                    methodExecutionTime->SetText("Execution time: " + std::to_string(static_cast<float>(benchmark_result.first) / 1000.f) + " us");
+                                    methodExecutionTime->SetText("Execution time: " + std::to_string(
+                                            static_cast<float>(benchmark_result.first) / 1000.f) + " us");
                                 })));
 
     }
-    for (int i = 0; i < array->methodsWithOutArgs.size(); i++) {
+    for (int i = 0; i < visualizer->methodsWithOutArgs.size(); i++) {
         buttons.push_back(
                 std::make_unique<Button>(
-                        Button(window.get(), sf::Vector2f(10, 100.f + static_cast<float>(i + array->methodsWithArgs.size()) * (50 + 8)),
-                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), array->methodsWithOutArgs[i], font.get(), [this, i]() {
-                                    auto benchmark_result = array->MethodButtonPressed(i, nullptr);
+                        Button(window.get(), sf::Vector2f(10, 100.f + static_cast<float>(i +
+                                                                                         visualizer->methodsWithArgs.size()) *
+                                                                      (50 + 8)),
+                               sf::Vector2f(controlsArea->getSize().x / 2 - 20, 50), visualizer->methodsWithOutArgs[i],
+                               font.get(), [this, i]() {
+                                    auto benchmark_result = visualizer->MethodButtonPressed(i, nullptr);
                                     if (benchmark_result.second)
                                         methodReturnState->SetText("Returned state: success");
                                     else
                                         methodReturnState->SetText("Returned state: failed");
-                                    methodExecutionTime->SetText("Execution time: " + std::to_string(static_cast<float>(benchmark_result.first) / 1000.f) + " us");
+                                    methodExecutionTime->SetText("Execution time: " + std::to_string(
+                                            static_cast<float>(benchmark_result.first) / 1000.f) + " us");
                                 })));
 
     }
-    methodReturnState = std::make_unique<StaticText>(StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120 - 50 - 20 - 50 - 20), sf::Vector2f(controlsArea->getSize().x - 20, 50), "Returned state: Non", font.get()));
-    methodExecutionTime = std::make_unique<StaticText>(StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120 - 50 - 20), sf::Vector2f(controlsArea->getSize().x - 20, 50), "Execution time: 0 us", font.get()));
-    sizeInBytes = std::make_unique<StaticText>(StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120), sf::Vector2f(controlsArea->getSize().x - 20, 50), "Used memory: 0 Bytes", font.get()));
+    methodReturnState = std::make_unique<StaticText>(
+            StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120 - 50 - 20 - 50 - 20),
+                       sf::Vector2f(controlsArea->getSize().x - 20, 50), "Returned state: Non", font.get()));
+    methodExecutionTime = std::make_unique<StaticText>(
+            StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120 - 50 - 20),
+                       sf::Vector2f(controlsArea->getSize().x - 20, 50), "Execution time: 0 us", font.get()));
+    sizeInBytes = std::make_unique<StaticText>(
+            StaticText(window.get(), sf::Vector2f(10, controlsArea->getSize().y - 120),
+                       sf::Vector2f(controlsArea->getSize().x - 20, 50), "Used memory: 0 Bytes", font.get()));
 }
 
 void MainWindow::Run() {
@@ -163,20 +196,26 @@ void MainWindow::HandelEvents() {
         if (event.type == sf::Event::MouseButtonPressed) {
             HandelMouseEvent(sf::Mouse::getPosition(*window));
         }
+        if (event.type == sf::Event::MouseWheelMoved) {
+            if (event.mouseWheel.delta > 0)
+                visualizer->ZoomIn(sf::Mouse::getPosition(*window));
+            else
+                visualizer->ZoomOut(sf::Mouse::getPosition(*window));
+        }
         if (event.type == sf::Event::KeyPressed) {
             HandelTexHolderEvents(event);
             switch (event.key.code) {
                 case sf::Keyboard::Left:
-                    array->MoveLeft();
+                    visualizer->MoveLeft();
                     break;
                 case sf::Keyboard::Right:
-                    array->MoveRight();
+                    visualizer->MoveRight();
                     break;
                 case sf::Keyboard::Up:
-                    array->MoveUp();
+                    visualizer->MoveUp();
                     break;
                 case sf::Keyboard::Down:
-                    array->MoveDown();
+                    visualizer->MoveDown();
                     break;
             }
         }
@@ -184,9 +223,10 @@ void MainWindow::HandelEvents() {
 }
 
 void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
+    selectingADataStructure = false;
     for (auto &button: buttons) {
         if (button->HandelClickEvent(mouse_position)) {
-            sizeInBytes->SetText("Used memory: " + std::to_string(array->GetSizeInBytes()) + " Bytes");
+            sizeInBytes->SetText("Used memory: " + std::to_string(visualizer->GetSizeInBytes()) + " Bytes");
             return;
         }
     }
@@ -201,6 +241,12 @@ void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
             return;
         }
     }
+
+    for (auto &button : dataStructuresButtons)
+        if (button->HandelClickEvent(mouse_position))
+            return;
+    if (selectADataStructure->HandelClickEvent(mouse_position))
+        return;
     if (zoomInButton->HandelClickEvent(mouse_position)) {
         if (zoomOutButton->InUse())
             zoomOutButton->ChangeTheState();
@@ -215,10 +261,26 @@ void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
 
     if (100.f + static_cast<float>(mouse_position.x) > visualisationArea->getPosition().x) {
         if (zoomInButton->InUse())
-            array->ZoomIn(mouse_position);
+            visualizer->ZoomIn(mouse_position);
         if (zoomOutButton->InUse())
-            array->ZoomOut(mouse_position);
+            visualizer->ZoomOut(mouse_position);
     }
+}
+
+void MainWindow::ChangeDataStructure(int idx) {
+    delete visualizer;
+    switch (idx) {
+        case 0:
+            visualizer = new ArrayVisualizer(window.get(), font.get());
+            break;
+        case 1:
+            visualizer = new LinkedListVisualizer(window.get(), font.get());
+            break;
+    }
+    buttons.clear();
+    textHolders.clear();
+    InitiateButtons();
+    selectADataStructure->SetText(availableDataStructures[idx]);
 }
 
 void MainWindow::HandelTexHolderEvents(sf::Event &event) {
@@ -289,8 +351,9 @@ void MainWindow::HandelTexHolderEvents(sf::Event &event) {
 
 void MainWindow::DrawComponents() const {
     window->draw(*visualisationArea);
-    array->Draw();
+    visualizer->Draw();
     window->draw(*controlsArea);
+    selectADataStructure->Draw();
     zoomInButton->Draw();
     zoomOutButton->Draw();
     methodReturnState->Draw();
@@ -302,5 +365,9 @@ void MainWindow::DrawComponents() const {
     for (auto &textHolder: textHolders) {
         textHolder->Draw();
     }
+    if (selectingADataStructure)
+        for (auto &button: dataStructuresButtons) {
+            button->Draw();
+        }
 
 }
