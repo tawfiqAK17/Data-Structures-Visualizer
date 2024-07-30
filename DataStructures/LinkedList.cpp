@@ -14,6 +14,7 @@ LinkedList::~LinkedList() {
     }
 }
 
+
 bool LinkedList::Push(int val) {
     head = new Node(val, head);
     size++;
