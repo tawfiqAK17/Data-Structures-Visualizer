@@ -27,20 +27,6 @@ sf::RectangleShape *NodeRect::GetRect() const {
     return nodeRect.get();
 }
 
-void NodeRect::ZoomIn(sf::Vector2f position) {
-    nodeRect->setSize(nodeRect->getSize() + sf::Vector2f(nodeRect->getSize().x / 4, nodeRect->getSize().y / 4));
-    nodeRect->setPosition(position);
-}
-
-void NodeRect::ZoomOut(sf::Vector2f position) {
-    nodeRect->setSize(nodeRect->getSize() - sf::Vector2f(nodeRect->getSize().x / 4, nodeRect->getSize().y / 4));
-    nodeRect->setPosition(position);
-}
-
-sf::Vector2f NodeRect::GetPosition() const {
-    return nodeRect->getPosition();
-}
-
 void NodeRect::MoveLeft(int amount) {
     nodeRect->setPosition(nodeRect->getPosition() - sf::Vector2f (amount, 0));
 }
@@ -57,6 +43,18 @@ void NodeRect::MoveDown(int amount) {
     nodeRect->setPosition(nodeRect->getPosition() + sf::Vector2f (0, amount));
 }
 
+void NodeRect::SetPosition(sf::Vector2f position) {
+    nodeRect->setPosition(position);
+}
+
+void NodeRect::SetSize(sf::Vector2f size) {
+    nodeRect->setSize(size);
+}
+
 sf::Vector2f NodeRect::GetSize() const {
     return nodeRect->getSize();
+}
+
+sf::Vector2f NodeRect::GetPosition() const {
+    return nodeRect->getPosition();
 }

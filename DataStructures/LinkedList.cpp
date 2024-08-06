@@ -1,7 +1,3 @@
-//
-// Created by tawfiq on 29/07/24.
-//
-
 #include <cstdlib>
 #include "LinkedList.h"
 
@@ -9,8 +5,9 @@ LinkedList::Node::Node(int val, LinkedList::Node *next) : val(val), next(next) {
 
 LinkedList::~LinkedList() {
     while (head){
-        delete head;
-        head = head->next;
+        auto temp = head;
+        head = temp->next;
+        delete temp;
     }
 }
 
@@ -23,12 +20,14 @@ bool LinkedList::Push(int val) {
 
 bool LinkedList::PushRandom(int number) {
     for (int i = 0; i < number; i++) {
-        Push(rand() % 1000);
+        Push(std::rand() % 1000);
     }
     return true;
 }
 
 bool LinkedList::Remove(int val) {
+    if (!head)
+        return false;
     auto temp = head;
     if (head->val == val) {
         head = head->next;
@@ -51,6 +50,16 @@ bool LinkedList::Remove(int val) {
         temp = nullptr;
         size--;
         return true;
+    }
+    return false;
+}
+
+bool LinkedList::Find(int val) {
+    auto temp = head;
+    while (temp) {
+        if (temp->val == val)
+            return true;
+        temp = temp->next;
     }
     return false;
 }

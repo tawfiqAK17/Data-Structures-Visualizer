@@ -1,6 +1,6 @@
 #include <iostream>
 #include "LinkedListVisualizer.h"
-#include "../DataStructures/LinkedList.h"
+#include "../../DataStructures/LinkedList.h"
 
 LinkedListVisualizer::LinkedListVisualizer(sf::RenderWindow *_window, sf::Font *_font) : Visualizer(_window, _font) {
     dataStructure = new LinkedList;
@@ -8,72 +8,50 @@ LinkedListVisualizer::LinkedListVisualizer(sf::RenderWindow *_window, sf::Font *
     methodsWithArgs.emplace_back("Push");
     methodsWithArgs.emplace_back("Push random");
     methodsWithArgs.emplace_back("Remove");
+    methodsWithArgs.emplace_back("Find");
     methodsWithOutArgs.emplace_back("Pop");
     methodsWithOutArgs.emplace_back("Revers");
     methodsWithOutArgs.emplace_back("Clear");
 }
 
-void LinkedListVisualizer::ParseNodes() {
-    sf::Vector2f currentPos = sf::Vector2f(window->getSize().x / 4 + 50, 500);
-
-    auto head = dynamic_cast<LinkedList *>(dataStructure)->GetHead();
-    if (!head)
-        return;
-    auto temp = head;
-    while (temp) {
-        std::unique_ptr<NodeRect> node = std::make_unique<NodeRect>(
-                NodeRect(font, temp->val, currentPos));
-
-        currentPos += sf::Vector2f(3 * node->GetSize().x / 2, 0);
-        nodes.push_back(std::move(node));
-        temp = temp->next;
-    }
-
-    ParseArrows();
-}
-
-void LinkedListVisualizer::ReParseNodes(sf::Vector2f first_node_position, sf::Vector2f size) {
+void LinkedListVisualizer::Parse(std::optional<sf::Vector2f> first_node_position, sf::Vector2f nodeSize) {
     nodes.clear();
-    sf::Vector2f currentPos = first_node_position;
+    arrows.clear();
+    sf::Vector2f currentPos;
+    if (first_node_position.has_value())
+        currentPos = first_node_position.value();
+    else
+        currentPos = sf::Vector2f(window->getSize().x / 4 + 20, window->getSize().y / 2);
     auto temp = dynamic_cast<LinkedList *>(dataStructure)->GetHead();
     while (temp) {
         std::unique_ptr<NodeRect> node = std::make_unique<NodeRect>(
-                NodeRect(font, temp->val, currentPos, size));
+                NodeRect(font, temp->val, currentPos, nodeSize));
         currentPos += sf::Vector2f(3 * node->GetSize().x / 2, 0);
         nodes.push_back(std::move(node));
+        if (nodes.size() > 1)
+            arrows.push_back(std::make_unique<Arrow>(Arrow(*nodes[nodes.size() - 1], *nodes[nodes.size() - 2])));
         temp = temp->next;
     }
-    ParseArrows();
 }
 
 void LinkedListVisualizer::ZoomIn(sf::Vector2i mousePos) {
     if (dataStructure->GetSize() == 0)
         return;
-    if (nodes[0]->GetSize().x < MAX_NODE_WIDTH) {
-        int amount = ((mousePos.x - nodes[0]->GetPosition().x) / nodes[0]->GetSize().x) * nodes[0]->GetSize().x / 4;
-        nodes[0]->MoveLeft(amount);
-        auto currentPosition = nodes[0]->GetPosition() - sf::Vector2f(0, nodes[0]->GetSize().y / 8);
+    auto size = sf::Vector2f(nodes[0]->GetSize() + sf::Vector2f(nodes[0]->GetSize().x / 4, nodes[0]->GetSize().y / 4));
+    float amount = ((mousePos.x - nodes[0]->GetPosition().x) / nodes[0]->GetSize().x) * nodes[0]->GetSize().x / 4;
+    auto position = nodes[0]->GetPosition() - sf::Vector2f(amount, 0);
 
-        for (auto &node: nodes) {
-            node->ZoomIn(currentPosition);
-            currentPosition = node->GetPosition() + sf::Vector2f(3 * node->GetRect()->getSize().x / 2, 0);
-        }
-        ParseArrows();
-    }
+    Parse(position, size);
 }
 
 void LinkedListVisualizer::ZoomOut(sf::Vector2i mousePos) {
     if (dataStructure->GetSize() == 0)
         return;
-    int amount = ((mousePos.x - nodes[0]->GetPosition().x) / nodes[0]->GetSize().x) * nodes[0]->GetSize().x / 4;
-    nodes[0]->MoveRight(amount);
-    auto currentPosition = nodes[0]->GetPosition() + sf::Vector2f(0, nodes[0]->GetSize().y / 8);
+    auto size = sf::Vector2f(nodes[0]->GetSize() - sf::Vector2f(nodes[0]->GetSize().x / 4, nodes[0]->GetSize().y / 4));
+    float amount = ((mousePos.x - nodes[0]->GetPosition().x) / nodes[0]->GetSize().x) * nodes[0]->GetSize().x / 4;
+    auto position = nodes[0]->GetPosition() + sf::Vector2f(amount, 0);
 
-    for (auto &node: nodes) {
-        node->ZoomOut(currentPosition);
-        currentPosition = node->GetPosition() + sf::Vector2f(3 * node->GetRect()->getSize().x / 2, 0);
-    }
-    ParseArrows();
+    Parse(position, size);
 }
 
 std::pair<unsigned long, bool> LinkedListVisualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
@@ -94,6 +72,11 @@ std::pair<unsigned long, bool> LinkedListVisualizer::MethodButtonPressed(int idx
             case 2:
                 executionInfo = Benchmark([this, parameter]() {
                     return dynamic_cast<LinkedList *>(dataStructure)->Remove(parameter);
+                });
+                break;
+            case 3:
+                executionInfo = Benchmark([this, parameter]() {
+                    return dynamic_cast<LinkedList *>(dataStructure)->Find(parameter);
                 });
                 break;
         }
@@ -117,10 +100,9 @@ std::pair<unsigned long, bool> LinkedListVisualizer::MethodButtonPressed(int idx
         }
     }
     if (nodes.empty()) {
-        ParseNodes();
-    }
-    else {
-        ReParseNodes(nodes[0]->GetPosition(), nodes[0]->GetSize());
+        Parse({}, {100, 90});
+    } else {
+        Parse(nodes[0]->GetPosition(), nodes[0]->GetSize());
     }
     return executionInfo;
 }

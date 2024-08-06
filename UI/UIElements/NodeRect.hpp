@@ -3,14 +3,14 @@
 
 class NodeRect {
 public:
-    NodeRect(sf::Font *font, int data, sf::Vector2f position, sf::Vector2f size = {200, 90});
+    NodeRect(sf::Font *font, int data, sf::Vector2f position, sf::Vector2f size = {10, 9});
     void Draw(sf::RenderWindow *window);
-    void ZoomIn(sf::Vector2f position);
-    void ZoomOut(sf::Vector2f position);
     void MoveLeft(int amount = 50);
     void MoveRight(int amount = 50);
     void MoveUp(int amount = 50);
     void MoveDown(int amount = 50);
+    void SetPosition(sf::Vector2f position);
+    void SetSize(sf::Vector2f size);
     [[nodiscard]] sf::RectangleShape* GetRect() const;
     [[nodiscard]] sf::Vector2f GetPosition() const;
     [[nodiscard]] sf::Vector2f GetSize() const;

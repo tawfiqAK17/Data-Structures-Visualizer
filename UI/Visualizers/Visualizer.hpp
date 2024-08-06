@@ -1,10 +1,12 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
-#include "NodeRect.hpp"
-#include "../DataStructures/DataStructure.hpp"
-#include "TextHolder.hpp"
-#include "Arrow.h"
+#include "../UIElements/NodeRect.hpp"
+#include "../../DataStructures/DataStructure.hpp"
+#include "../UIElements/TextHolder.hpp"
+#include "../UIElements/Arrow.h"
+
+#include <optional>
 
 #define MAX_NODE_WIDTH 600
 
@@ -12,9 +14,7 @@ class Visualizer {
 public:
     Visualizer(sf::RenderWindow *_window, sf::Font *_font);
     virtual ~Visualizer();
-    virtual void ParseNodes() = 0;
-    virtual void ReParseNodes(sf::Vector2f first_node_position, sf::Vector2f size) = 0;
-    void ParseArrows();
+    virtual void Parse(std::optional<sf::Vector2f> first_node_position, sf::Vector2f size) = 0;
     void Draw();
     virtual void ZoomIn(sf::Vector2i mousePos) = 0;
     virtual void ZoomOut(sf::Vector2i mousePos) = 0;

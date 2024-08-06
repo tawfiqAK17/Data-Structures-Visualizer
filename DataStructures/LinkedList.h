@@ -16,8 +16,9 @@ public:
     ~LinkedList() override;
     bool Push(int val);
     bool PushRandom(int number);
-    bool Pop();
     bool Remove(int val);
+    bool Find(int val);
+    bool Pop();
     bool Revers();
     bool Clear();
     unsigned long GetSizeInBytes() override;

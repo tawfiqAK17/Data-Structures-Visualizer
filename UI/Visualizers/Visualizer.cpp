@@ -21,18 +21,9 @@ std::pair<unsigned long, bool> Visualizer::Benchmark(const std::function<bool(vo
     return {std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count(), fun_return_state};
 }
 
-void Visualizer::ParseArrows() {
-    arrows.clear();
-    if (nodes.empty())
-        return;
-    for (int i = 0; i < nodes.size() - 1; i++) {
-        arrows.push_back(std::make_unique<Arrow>(Arrow(*nodes[i], *nodes[i + 1])));
-    }
-}
-
 void Visualizer::Draw() {
     for (auto &arrow: arrows) {
-        if (arrow->GetPosition().x > window->getSize().x ||
+        if (arrow->GetPosition().x > window->getSize().x + arrow->GetSize().x||
             arrow->GetPosition().x + arrow->GetSize().x < 0 ||
             arrow->GetPosition().y > window->getSize().y || arrow->GetPosition().y + arrow->GetSize().y < 0)
             continue;

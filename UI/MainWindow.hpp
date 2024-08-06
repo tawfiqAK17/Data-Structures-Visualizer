@@ -1,11 +1,12 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
-#include "ArrayVisualizer.hpp"
-#include "LinkedListVisualizer.h"
-#include "Button.hpp"
-#include "TextHolder.hpp"
-#include "StaticText.hpp"
+#include "Visualizers/ArrayVisualizer.hpp"
+#include "Visualizers/LinkedListVisualizer.h"
+#include "Visualizers/BinarySearchTreeVisualizer.h"
+#include "UIElements/Button.hpp"
+#include "UIElements/TextHolder.hpp"
+#include "UIElements/StaticText.hpp"
 
 class MainWindow {
 private:

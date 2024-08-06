@@ -61,12 +61,13 @@ void MainWindow::InitiateFields() {
     controlsArea->setFillColor({169, 169, 169, 255});
 
     visualizer = new ArrayVisualizer(window.get(), font.get());
-    visualizer->ParseNodes();
+    visualizer->Parse({}, {100, 90});
+
     availableDataStructures.emplace_back("Array");
     availableDataStructures.emplace_back("Linked list");
+    availableDataStructures.emplace_back("Binary search tree");
 
     InitiateButtons();
-
 
 }
 
@@ -242,7 +243,7 @@ void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
         }
     }
 
-    for (auto &button : dataStructuresButtons)
+    for (auto &button: dataStructuresButtons)
         if (button->HandelClickEvent(mouse_position))
             return;
     if (selectADataStructure->HandelClickEvent(mouse_position))
@@ -269,12 +270,16 @@ void MainWindow::HandelMouseEvent(sf::Vector2i mouse_position) {
 
 void MainWindow::ChangeDataStructure(int idx) {
     delete visualizer;
+    visualizer = nullptr;
     switch (idx) {
         case 0:
             visualizer = new ArrayVisualizer(window.get(), font.get());
             break;
         case 1:
             visualizer = new LinkedListVisualizer(window.get(), font.get());
+            break;
+        case 2:
+            visualizer = new BinarySearchTreeVisualizer(window.get(), font.get());
             break;
     }
     buttons.clear();

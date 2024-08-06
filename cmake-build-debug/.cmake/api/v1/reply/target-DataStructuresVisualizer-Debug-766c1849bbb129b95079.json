@@ -31,7 +31,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 41,
+				"line" : 37,
 				"parent" : 0
 			}
 		]
@@ -62,13 +62,15 @@
 				3,
 				4,
 				5,
+				6,
 				7,
+				8,
 				9,
+				10,
 				11,
+				12,
 				13,
-				15,
-				17,
-				19
+				15
 			]
 		}
 	],
@@ -122,27 +124,23 @@
 				3,
 				4,
 				5,
+				6,
 				7,
+				8,
 				9,
+				10,
 				11,
+				12,
 				13,
-				15,
-				17,
-				19
+				15
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				6,
-				8,
-				10,
-				12,
 				14,
-				16,
-				18,
-				20
+				16
 			]
 		}
 	],
@@ -163,19 +161,19 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "UI/ArrayVisualizer.cpp",
+			"path" : "UI/Visualizers/ArrayVisualizer.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "UI/NodeRect.cpp",
+			"path" : "UI/UIElements/NodeRect.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "UI/Button.cpp",
+			"path" : "UI/UIElements/Button.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -186,30 +184,15 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "DataStructures/DataStructure.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "UI/Visualizer.cpp",
+			"path" : "UI/Visualizers/Visualizer.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "UI/Visualizer.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "UI/TextHolder.cpp",
+			"path" : "UI/UIElements/TextHolder.cpp",
 			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "UI/TextHolder.hpp",
-			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
@@ -219,19 +202,9 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "DataStructures/Array.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "UI/StaticText.cpp",
+			"path" : "UI/UIElements/StaticText.cpp",
 			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "UI/StaticText.hpp",
-			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
@@ -241,29 +214,36 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "DataStructures/LinkedList.h",
+			"compileGroupIndex" : 0,
+			"path" : "UI/Visualizers/LinkedListVisualizer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "UI/UIElements/Arrow.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "DataStructures/BinarySearchTree.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "DataStructures/BinarySearchTree.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "UI/LinkedListVisualizer.cpp",
+			"path" : "UI/Visualizers/BinarySearchTreeVisualizer.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "UI/LinkedListVisualizer.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "UI/Arrow.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "UI/Arrow.h",
+			"path" : "UI/Visualizers/BinarySearchTreeVisualizer.h",
 			"sourceGroupIndex" : 1
 		}
 	],
