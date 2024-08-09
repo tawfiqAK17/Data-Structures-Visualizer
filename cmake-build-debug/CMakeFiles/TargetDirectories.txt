@@ -1,3 +1,0 @@
-/home/tawfiq/CLionProjects/DataStructuresVisualizer/cmake-build-debug/CMakeFiles/DataStructuresVisualizer.dir
-/home/tawfiq/CLionProjects/DataStructuresVisualizer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/tawfiq/CLionProjects/DataStructuresVisualizer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -47,7 +47,7 @@ void MainWindow::InitiateFields() {
     window->setPosition({0, 0});
 
     font = std::make_unique<sf::Font>(sf::Font());
-    font->loadFromFile("UI/font.ttf");
+    font->loadFromFile("/home/tawfiq/CppProjects/DataStructuresVisualizer/UI/font.ttf");
     visualisationArea = std::make_unique<sf::RectangleShape>(sf::RectangleShape(
             {static_cast<float>(window->getSize().x) * 3.f / 4, static_cast<float>(window->getSize().y)}));
     visualisationArea->setPosition(static_cast<float>(window->getSize().x) / 4, 0);

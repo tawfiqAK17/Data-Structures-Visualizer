@@ -1,5 +1,5 @@
 #pragma once
-
+#include <functional>
 #include "SFML/Graphics.hpp"
 #include "NodeRect.hpp"
 #include "../DataStructures/DataStructure.hpp"
