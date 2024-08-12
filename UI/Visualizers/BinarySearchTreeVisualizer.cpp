@@ -12,8 +12,9 @@ BinarySearchTreeVisualizer::BinarySearchTreeVisualizer(sf::RenderWindow *_window
 
     methodsWithArgs.emplace_back("Insert");
     methodsWithArgs.emplace_back("Insert random");
-
-    std::cout << CalculateTreeWidth(dynamic_cast<BinarySearchTree *>(dataStructure)->GetRoot()) << "\n";
+    methodsWithArgs.emplace_back("Remove");
+    methodsWithArgs.emplace_back("Find");
+    methodsWithOutArgs.emplace_back("Clear");
 }
 
 
@@ -95,6 +96,24 @@ std::pair<unsigned long, bool> BinarySearchTreeVisualizer::MethodButtonPressed(i
             case 1:
                 executionInfo = Benchmark([this, parameter]() {
                     return dynamic_cast<BinarySearchTree *>(dataStructure)->InsertRandom(parameter);
+                });
+                break;
+            case 2:
+                executionInfo = Benchmark([this, parameter]() {
+                    return dynamic_cast<BinarySearchTree *>(dataStructure)->Remove(parameter);
+                });
+                break;
+            case 3:
+                executionInfo = Benchmark([this, parameter]() {
+                    return dynamic_cast<BinarySearchTree *>(dataStructure)->Find(parameter);
+                });
+                break;
+        }
+    } else {
+        switch (idx) {
+            case 0:
+                executionInfo = Benchmark([this](){
+                    return dynamic_cast<BinarySearchTree *>(dataStructure)->Clear();
                 });
                 break;
         }

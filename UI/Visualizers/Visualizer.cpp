@@ -25,7 +25,7 @@ void Visualizer::Draw() {
     for (auto &arrow: arrows) {
         if (arrow->GetPosition().x > window->getSize().x + arrow->GetSize().x||
             arrow->GetPosition().x + arrow->GetSize().x < 0 ||
-            arrow->GetPosition().y > window->getSize().y || arrow->GetPosition().y + arrow->GetSize().y < 0)
+            arrow->GetPosition().y > window->getSize().y || arrow->GetPosition().y + arrow->GetSize().x < 0)
             continue;
         arrow->Draw(window);
     }

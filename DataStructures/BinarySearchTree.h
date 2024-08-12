@@ -15,11 +15,17 @@ public:
     ~BinarySearchTree() override;
     bool Insert(int val);
     bool InsertRandom(int number);
+    bool Remove(int val);
+    bool Find(int val);
+    bool Clear(); 
 
     Node* GetRoot() const;
     unsigned long GetSizeInBytes() override;
 private:
+    Node* RecursiveRemove(Node *node, int val, bool &success);
+    int GetSeccesorVal(Node *node);
     Node* RecursiveInsert(Node *node, int val);
+    void RecursiveClear(Node *root);
 private:
     Node *root = nullptr;
 };

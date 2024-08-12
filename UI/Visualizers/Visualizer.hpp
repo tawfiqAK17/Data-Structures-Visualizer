@@ -7,6 +7,7 @@
 #include "../UIElements/Arrow.h"
 
 #include <optional>
+#include <functional>
 
 #define MAX_NODE_WIDTH 600
 
