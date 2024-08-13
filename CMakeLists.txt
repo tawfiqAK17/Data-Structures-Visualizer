@@ -28,6 +28,8 @@ add_executable(DataStructuresVisualizer main.cpp
         DataStructures/BinarySearchTree.h
         UI/Visualizers/BinarySearchTreeVisualizer.cpp
         UI/Visualizers/BinarySearchTreeVisualizer.h
+        DataStructures/AvlTree.cpp
+        UI/Visualizers/AvlTreeVisualizer.cpp
 )
 
 # Include SFML directories

@@ -4,6 +4,7 @@
 #include "Visualizers/ArrayVisualizer.hpp"
 #include "Visualizers/LinkedListVisualizer.h"
 #include "Visualizers/BinarySearchTreeVisualizer.h"
+#include "Visualizers/AvlTreeVisualizer.h"
 #include "UIElements/Button.hpp"
 #include "UIElements/TextHolder.hpp"
 #include "UIElements/StaticText.hpp"

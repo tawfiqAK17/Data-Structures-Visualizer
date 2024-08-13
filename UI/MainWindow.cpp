@@ -66,6 +66,7 @@ void MainWindow::InitiateFields() {
     availableDataStructures.emplace_back("Array");
     availableDataStructures.emplace_back("Linked list");
     availableDataStructures.emplace_back("Binary search tree");
+    availableDataStructures.emplace_back("AVL tree");
 
     InitiateButtons();
 
@@ -280,6 +281,9 @@ void MainWindow::ChangeDataStructure(int idx) {
             break;
         case 2:
             visualizer = new BinarySearchTreeVisualizer(window.get(), font.get());
+            break;
+        case 3:
+            visualizer = new AvlTreeVisualizer(window.get(), font.get());
             break;
     }
     buttons.clear();

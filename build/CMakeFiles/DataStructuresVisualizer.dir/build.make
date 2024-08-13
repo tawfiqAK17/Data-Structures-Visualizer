@@ -279,6 +279,34 @@ CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualize
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/BinarySearchTreeVisualizer.cpp -o CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.s
 
+CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o: CMakeFiles/DataStructuresVisualizer.dir/flags.make
+CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o: /home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/AvlTree.cpp
+CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o: CMakeFiles/DataStructuresVisualizer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/tawfiq/CppProjects/DataStructuresVisualizer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o -MF CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o.d -o CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o -c /home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/AvlTree.cpp
+
+CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/AvlTree.cpp > CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.i
+
+CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/AvlTree.cpp -o CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.s
+
+CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o: CMakeFiles/DataStructuresVisualizer.dir/flags.make
+CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o: /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/AvlTreeVisualizer.cpp
+CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o: CMakeFiles/DataStructuresVisualizer.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/tawfiq/CppProjects/DataStructuresVisualizer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o -MF CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o.d -o CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o -c /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/AvlTreeVisualizer.cpp
+
+CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/AvlTreeVisualizer.cpp > CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.i
+
+CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/AvlTreeVisualizer.cpp -o CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.s
+
 # Object files for target DataStructuresVisualizer
 DataStructuresVisualizer_OBJECTS = \
 "CMakeFiles/DataStructuresVisualizer.dir/main.cpp.o" \
@@ -295,7 +323,9 @@ DataStructuresVisualizer_OBJECTS = \
 "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/LinkedListVisualizer.cpp.o" \
 "CMakeFiles/DataStructuresVisualizer.dir/UI/UIElements/Arrow.cpp.o" \
 "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/BinarySearchTree.cpp.o" \
-"CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.o"
+"CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.o" \
+"CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o" \
+"CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o"
 
 # External object files for target DataStructuresVisualizer
 DataStructuresVisualizer_EXTERNAL_OBJECTS =
@@ -315,12 +345,14 @@ DataStructuresVisualizer: CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers
 DataStructuresVisualizer: CMakeFiles/DataStructuresVisualizer.dir/UI/UIElements/Arrow.cpp.o
 DataStructuresVisualizer: CMakeFiles/DataStructuresVisualizer.dir/DataStructures/BinarySearchTree.cpp.o
 DataStructuresVisualizer: CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.o
+DataStructuresVisualizer: CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o
+DataStructuresVisualizer: CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o
 DataStructuresVisualizer: CMakeFiles/DataStructuresVisualizer.dir/build.make
 DataStructuresVisualizer: /usr/lib/libsfml-graphics.so.2.6.1
 DataStructuresVisualizer: /usr/lib/libsfml-window.so.2.6.1
 DataStructuresVisualizer: /usr/lib/libsfml-system.so.2.6.1
 DataStructuresVisualizer: CMakeFiles/DataStructuresVisualizer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/tawfiq/CppProjects/DataStructuresVisualizer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable DataStructuresVisualizer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/tawfiq/CppProjects/DataStructuresVisualizer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable DataStructuresVisualizer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DataStructuresVisualizer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/Array.cpp" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Array.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Array.cpp.o.d"
+  "/home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/AvlTree.cpp" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o.d"
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/BinarySearchTree.cpp" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/BinarySearchTree.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/BinarySearchTree.cpp.o.d"
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/DataStructure.cpp" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/DataStructure.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/DataStructure.cpp.o.d"
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/DataStructures/LinkedList.cpp" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/LinkedList.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/LinkedList.cpp.o.d"
@@ -19,6 +20,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/UI/UIElements/StaticText.cpp" "CMakeFiles/DataStructuresVisualizer.dir/UI/UIElements/StaticText.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/UI/UIElements/StaticText.cpp.o.d"
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/UI/UIElements/TextHolder.cpp" "CMakeFiles/DataStructuresVisualizer.dir/UI/UIElements/TextHolder.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/UI/UIElements/TextHolder.cpp.o.d"
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/ArrayVisualizer.cpp" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/ArrayVisualizer.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/ArrayVisualizer.cpp.o.d"
+  "/home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/AvlTreeVisualizer.cpp" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o.d"
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/BinarySearchTreeVisualizer.cpp" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.o.d"
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/LinkedListVisualizer.cpp" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/LinkedListVisualizer.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/LinkedListVisualizer.cpp.o.d"
   "/home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/Visualizer.cpp" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/Visualizer.cpp.o" "gcc" "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/Visualizer.cpp.o.d"

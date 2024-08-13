@@ -153,6 +153,30 @@ DataStructures/Array.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresVisualizer.dir/build.make CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Array.cpp.s
 .PHONY : DataStructures/Array.cpp.s
 
+DataStructures/AvlTree.o: DataStructures/AvlTree.cpp.o
+.PHONY : DataStructures/AvlTree.o
+
+# target to build an object file
+DataStructures/AvlTree.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresVisualizer.dir/build.make CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o
+.PHONY : DataStructures/AvlTree.cpp.o
+
+DataStructures/AvlTree.i: DataStructures/AvlTree.cpp.i
+.PHONY : DataStructures/AvlTree.i
+
+# target to preprocess a source file
+DataStructures/AvlTree.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresVisualizer.dir/build.make CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.i
+.PHONY : DataStructures/AvlTree.cpp.i
+
+DataStructures/AvlTree.s: DataStructures/AvlTree.cpp.s
+.PHONY : DataStructures/AvlTree.s
+
+# target to generate assembly for a file
+DataStructures/AvlTree.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresVisualizer.dir/build.make CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.s
+.PHONY : DataStructures/AvlTree.cpp.s
+
 DataStructures/BinarySearchTree.o: DataStructures/BinarySearchTree.cpp.o
 .PHONY : DataStructures/BinarySearchTree.o
 
@@ -393,6 +417,30 @@ UI/Visualizers/ArrayVisualizer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresVisualizer.dir/build.make CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/ArrayVisualizer.cpp.s
 .PHONY : UI/Visualizers/ArrayVisualizer.cpp.s
 
+UI/Visualizers/AvlTreeVisualizer.o: UI/Visualizers/AvlTreeVisualizer.cpp.o
+.PHONY : UI/Visualizers/AvlTreeVisualizer.o
+
+# target to build an object file
+UI/Visualizers/AvlTreeVisualizer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresVisualizer.dir/build.make CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o
+.PHONY : UI/Visualizers/AvlTreeVisualizer.cpp.o
+
+UI/Visualizers/AvlTreeVisualizer.i: UI/Visualizers/AvlTreeVisualizer.cpp.i
+.PHONY : UI/Visualizers/AvlTreeVisualizer.i
+
+# target to preprocess a source file
+UI/Visualizers/AvlTreeVisualizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresVisualizer.dir/build.make CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.i
+.PHONY : UI/Visualizers/AvlTreeVisualizer.cpp.i
+
+UI/Visualizers/AvlTreeVisualizer.s: UI/Visualizers/AvlTreeVisualizer.cpp.s
+.PHONY : UI/Visualizers/AvlTreeVisualizer.s
+
+# target to generate assembly for a file
+UI/Visualizers/AvlTreeVisualizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresVisualizer.dir/build.make CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.s
+.PHONY : UI/Visualizers/AvlTreeVisualizer.cpp.s
+
 UI/Visualizers/BinarySearchTreeVisualizer.o: UI/Visualizers/BinarySearchTreeVisualizer.cpp.o
 .PHONY : UI/Visualizers/BinarySearchTreeVisualizer.o
 
@@ -501,6 +549,9 @@ help:
 	@echo "... DataStructures/Array.o"
 	@echo "... DataStructures/Array.i"
 	@echo "... DataStructures/Array.s"
+	@echo "... DataStructures/AvlTree.o"
+	@echo "... DataStructures/AvlTree.i"
+	@echo "... DataStructures/AvlTree.s"
 	@echo "... DataStructures/BinarySearchTree.o"
 	@echo "... DataStructures/BinarySearchTree.i"
 	@echo "... DataStructures/BinarySearchTree.s"
@@ -531,6 +582,9 @@ help:
 	@echo "... UI/Visualizers/ArrayVisualizer.o"
 	@echo "... UI/Visualizers/ArrayVisualizer.i"
 	@echo "... UI/Visualizers/ArrayVisualizer.s"
+	@echo "... UI/Visualizers/AvlTreeVisualizer.o"
+	@echo "... UI/Visualizers/AvlTreeVisualizer.i"
+	@echo "... UI/Visualizers/AvlTreeVisualizer.s"
 	@echo "... UI/Visualizers/BinarySearchTreeVisualizer.o"
 	@echo "... UI/Visualizers/BinarySearchTreeVisualizer.i"
 	@echo "... UI/Visualizers/BinarySearchTreeVisualizer.s"

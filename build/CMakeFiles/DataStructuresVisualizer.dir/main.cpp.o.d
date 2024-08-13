@@ -262,5 +262,7 @@ CMakeFiles/DataStructuresVisualizer.dir/main.cpp.o: \
  /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/LinkedListVisualizer.h \
  /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/BinarySearchTreeVisualizer.h \
  /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/../../DataStructures/BinarySearchTree.h \
+ /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/AvlTreeVisualizer.h \
+ /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/Visualizers/../../DataStructures/AvlTree.h \
  /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/UIElements/Button.hpp \
  /home/tawfiq/CppProjects/DataStructuresVisualizer/UI/UIElements/StaticText.hpp

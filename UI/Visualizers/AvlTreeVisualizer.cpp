@@ -1,13 +1,11 @@
-
-#include <iostream>
 #include <queue>
-#include "BinarySearchTreeVisualizer.h"
+#include "AvlTreeVisualizer.h"
 
-int CalculateTreeWidth(BinarySearchTree::Node *root);
+int CalculateTreeWidth(AvlTree::Node *root);
 
-BinarySearchTreeVisualizer::BinarySearchTreeVisualizer(sf::RenderWindow *_window, sf::Font *_font) : Visualizer(_window,
-                                                                                                                _font) {
-    dataStructure = new BinarySearchTree;
+AvlTreeVisualizer::AvlTreeVisualizer(sf::RenderWindow *_window, sf::Font *_font) : Visualizer(_window,
+                                                                                _font) {
+    dataStructure = new AvlTree;
 
 
     methodsWithArgs.emplace_back("Insert");
@@ -18,7 +16,7 @@ BinarySearchTreeVisualizer::BinarySearchTreeVisualizer(sf::RenderWindow *_window
 }
 
 
-void BinarySearchTreeVisualizer::Parse(std::optional<sf::Vector2f> first_node_position, sf::Vector2f nodeSize) {
+void AvlTreeVisualizer::Parse(std::optional<sf::Vector2f> first_node_position, sf::Vector2f nodeSize) {
     nodes.clear();
     arrows.clear();
     sf::Vector2f currentPos;
@@ -28,7 +26,7 @@ void BinarySearchTreeVisualizer::Parse(std::optional<sf::Vector2f> first_node_po
         currentPos = sf::Vector2f(3 * window->getSize().x / 4 - 100, 20);
     if (dataStructure->GetSize() == 0)
         return;
-    auto head = dynamic_cast<BinarySearchTree *>(dataStructure)->GetRoot();
+    auto head = dynamic_cast<AvlTree *>(dataStructure)->GetRoot();
     RecursiveParse(head, currentPos, nodeSize, 0);
 
     for (auto &arrow: arrows)
@@ -36,7 +34,7 @@ void BinarySearchTreeVisualizer::Parse(std::optional<sf::Vector2f> first_node_po
 }
 
 void
-BinarySearchTreeVisualizer::RecursiveParse(BinarySearchTree::Node *node, sf::Vector2f currentPos, sf::Vector2f nodeSize,
+AvlTreeVisualizer::RecursiveParse(AvlTree::Node *node, sf::Vector2f currentPos, sf::Vector2f nodeSize,
                                            int nodeIdx) {
     for (auto &node: nodes) {
         if (node->GetPosition() == currentPos) {
@@ -63,7 +61,7 @@ BinarySearchTreeVisualizer::RecursiveParse(BinarySearchTree::Node *node, sf::Vec
 }
 
 
-void BinarySearchTreeVisualizer::ZoomIn(sf::Vector2i mousePos) {
+void AvlTreeVisualizer::ZoomIn(sf::Vector2i mousePos) {
     if (nodes.empty())
         return;
     auto size = sf::Vector2f(nodes[0]->GetSize() + sf::Vector2f(nodes[0]->GetSize().x / 4, nodes[0]->GetSize().y / 4));
@@ -75,7 +73,7 @@ void BinarySearchTreeVisualizer::ZoomIn(sf::Vector2i mousePos) {
         Parse(position, size);
 }
 
-void BinarySearchTreeVisualizer::ZoomOut(sf::Vector2i mousePos) {
+void AvlTreeVisualizer::ZoomOut(sf::Vector2i mousePos) {
     if (nodes.empty())
         return;
     auto size = sf::Vector2f(nodes[0]->GetSize() - sf::Vector2f(nodes[0]->GetSize().x / 4, nodes[0]->GetSize().y / 4));
@@ -85,31 +83,31 @@ void BinarySearchTreeVisualizer::ZoomOut(sf::Vector2i mousePos) {
     auto position = nodes[0]->GetPosition() + sf::Vector2f(xAmount, yAmount);
 
     Parse(position, size);
-}
+    }
 
-std::pair<unsigned long, bool> BinarySearchTreeVisualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
+std::pair<unsigned long, bool> AvlTreeVisualizer::MethodButtonPressed(int idx, TextHolder *textHolder) {
     std::pair<unsigned long, bool> executionInfo = {};
     if (textHolder) { // call to a method with args
         int parameter = textHolder->GetStringAsInt();
         switch (idx) {
             case 0:
                 executionInfo = Benchmark([this, parameter]() {
-                    return dynamic_cast<BinarySearchTree *>(dataStructure)->Insert(parameter);
+                    return dynamic_cast<AvlTree *>(dataStructure)->Insert(parameter);
                 });
                 break;
             case 1:
                 executionInfo = Benchmark([this, parameter]() {
-                    return dynamic_cast<BinarySearchTree *>(dataStructure)->InsertRandom(parameter);
+                    return dynamic_cast<AvlTree *>(dataStructure)->InsertRandom(parameter);
                 });
                 break;
             case 2:
                 executionInfo = Benchmark([this, parameter]() {
-                    return dynamic_cast<BinarySearchTree *>(dataStructure)->Remove(parameter);
+                    return dynamic_cast<AvlTree *>(dataStructure)->Remove(parameter);
                 });
                 break;
             case 3:
                 executionInfo = Benchmark([this, parameter]() {
-                    return dynamic_cast<BinarySearchTree *>(dataStructure)->Find(parameter);
+                    return dynamic_cast<AvlTree *>(dataStructure)->Find(parameter);
                 });
                 break;
         }
@@ -117,7 +115,7 @@ std::pair<unsigned long, bool> BinarySearchTreeVisualizer::MethodButtonPressed(i
         switch (idx) {
             case 0:
                 executionInfo = Benchmark([this](){
-                    return dynamic_cast<BinarySearchTree *>(dataStructure)->Clear();
+                    return dynamic_cast<AvlTree *>(dataStructure)->Clear();
                 });
                 break;
         }
@@ -131,11 +129,11 @@ std::pair<unsigned long, bool> BinarySearchTreeVisualizer::MethodButtonPressed(i
     return executionInfo;
 }
 
-int BinarySearchTreeVisualizer::CalculateTreeWidth(BinarySearchTree::Node *root) {
+int AvlTreeVisualizer::CalculateTreeWidth(AvlTree::Node *root) {
     if (!root) return 0;
 
     int maxWidth = 1;
-    std::queue<BinarySearchTree::Node *> q;
+    std::queue<AvlTree::Node *> q;
 
     // Start with the root node
     q.push(root);

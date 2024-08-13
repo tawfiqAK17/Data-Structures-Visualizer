@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Array.cpp.o"
   "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/Array.cpp.o.d"
+  "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o"
+  "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/AvlTree.cpp.o.d"
   "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/BinarySearchTree.cpp.o"
   "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/BinarySearchTree.cpp.o.d"
   "CMakeFiles/DataStructuresVisualizer.dir/DataStructures/DataStructure.cpp.o"
@@ -21,6 +23,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DataStructuresVisualizer.dir/UI/UIElements/TextHolder.cpp.o.d"
   "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/ArrayVisualizer.cpp.o"
   "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/ArrayVisualizer.cpp.o.d"
+  "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o"
+  "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/AvlTreeVisualizer.cpp.o.d"
   "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.o"
   "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/BinarySearchTreeVisualizer.cpp.o.d"
   "CMakeFiles/DataStructuresVisualizer.dir/UI/Visualizers/LinkedListVisualizer.cpp.o"
