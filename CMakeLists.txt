@@ -25,9 +25,7 @@ add_executable(DataStructuresVisualizer main.cpp
         UI/Visualizers/LinkedListVisualizer.cpp
         UI/UIElements/Arrow.cpp
         DataStructures/BinarySearchTree.cpp
-        DataStructures/BinarySearchTree.h
         UI/Visualizers/BinarySearchTreeVisualizer.cpp
-        UI/Visualizers/BinarySearchTreeVisualizer.h
         DataStructures/AvlTree.cpp
         UI/Visualizers/AvlTreeVisualizer.cpp
 )

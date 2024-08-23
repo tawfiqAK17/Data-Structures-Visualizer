@@ -286,6 +286,7 @@ void MainWindow::ChangeDataStructure(int idx) {
             visualizer = new AvlTreeVisualizer(window.get(), font.get());
             break;
     }
+    visualizer->Parse({}, {100, 90});
     buttons.clear();
     textHolders.clear();
     InitiateButtons();
