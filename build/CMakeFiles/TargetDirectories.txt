@@ -1,3 +1,0 @@
-/home/tawfiq/CppProjects/DataStructuresVisualizer/build/CMakeFiles/DataStructuresVisualizer.dir
-/home/tawfiq/CppProjects/DataStructuresVisualizer/build/CMakeFiles/edit_cache.dir
-/home/tawfiq/CppProjects/DataStructuresVisualizer/build/CMakeFiles/rebuild_cache.dir

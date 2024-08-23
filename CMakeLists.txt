@@ -7,6 +7,7 @@ project(DataStructuresVisualizer VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+#set(SFML_DIR "../libraries/SFML/build")
 # Find the SFML package with required components
 find_package(SFML COMPONENTS graphics window system REQUIRED)
 
